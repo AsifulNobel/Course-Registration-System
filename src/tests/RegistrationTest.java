@@ -22,4 +22,17 @@ public class RegistrationTest {
 
         Assert.assertEquals((3 * 3 * 5500), total);
     }
+
+    @Test
+    public void addCourseTest() {
+        Registration registration = new Registration();
+
+        int numCoursesBefore = registration.getCourseList().size();
+
+        registration.addCourse(new Course("CSE 327", "Soft.Eng.", 3, 5500));
+        int numCoursesAfter = registration.getCourseList().size();
+
+        Assert.assertEquals(numCoursesBefore + 1, numCoursesAfter);
+
+    }
 }
