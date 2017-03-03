@@ -1,4 +1,4 @@
-package assignment.gui;
+package assignment.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
