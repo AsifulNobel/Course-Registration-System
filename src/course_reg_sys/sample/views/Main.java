@@ -1,4 +1,4 @@
-package sample;
+package course_reg_sys.sample.views;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Course Registration System");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 750, 480));
         primaryStage.show();
     }
 
