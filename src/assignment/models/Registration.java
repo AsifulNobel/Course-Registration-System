@@ -27,9 +27,7 @@ public class Registration {
     }
 
     public int getTotal() {
-        int total = 0;
-
-        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
+        int total = courseList.stream().mapToInt(Course::getSubTotal).sum();
 
         return total;
     }
