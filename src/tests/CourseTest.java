@@ -1,4 +1,4 @@
-package assignment.tests;
+package tests;
 
 
 import assignment.models.Course;
