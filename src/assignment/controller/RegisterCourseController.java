@@ -1,4 +1,4 @@
-package assignment;
+package assignment.controller;
 
 public class RegisterCourseController {
 }
