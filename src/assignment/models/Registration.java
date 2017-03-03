@@ -23,7 +23,7 @@ public class Registration {
     }
 
     public void addCourse(Course newCourse) {
-
+        courseList.add(newCourse);
     }
 
     public int getTotal() {

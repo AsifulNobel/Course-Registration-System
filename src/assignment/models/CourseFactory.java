@@ -16,7 +16,7 @@ public class CourseFactory {
         cList.add(new Course("CSE 327", "Soft.Eng.", 3, 5500));
         cList.add(new Course("CSE 440", "Intro. to AI", 3, 5500));
         cList.add(new Course("CSE 472", "Adv.Algo.", 3, 5500));
-        cList.add(new Course("CSE 373", "Intro.Algo", 3, 5500));
+        cList.add(new Course("CSE 373", "Intro.Algo.", 3, 5500));
         cList.add(new Course("CSE 115", "Prog.Lang.1", 4, 5500));
         cList.add(new Course("CSE 173", "Disc.Math", 3, 5500));
         cList.add(new Course("CSE 215", "Prog.Lang.2", 4, 5500));
