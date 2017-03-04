@@ -60,6 +60,9 @@ local.properties
 
 # User-specific stuff:
 .idea/**/workspace.xml
+.idea/compiler.xml
+.idea/copyright/
+
 .idea/**/tasks.xml
 
 # Sensitive or high-churn files:
