@@ -1,5 +1,7 @@
 package assignment.models;
 
+import sun.awt.image.ImageWatched;
+
 import java.util.LinkedList;
 
 /**
@@ -28,6 +30,7 @@ public class CourseFactory {
     public LinkedList<Course> getcList() {
         return cList;
     }
+
 
     public Course getCourse(String id) {
         Course course;

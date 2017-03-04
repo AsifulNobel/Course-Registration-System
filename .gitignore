@@ -103,6 +103,7 @@ fabric.properties
 
 *.iml
 modules.xml
+.idea/compiler.xml
 .idea/misc.xml
 *.ipr
 

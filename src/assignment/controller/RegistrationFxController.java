@@ -4,20 +4,17 @@ import assignment.models.Course;
 import assignment.models.CourseFactory;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 
-import javax.swing.*;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Created by nobel on 04/03/17.
@@ -33,7 +30,7 @@ public class RegistrationFxController implements Initializable {
     @FXML private Button addButton;
     @FXML private Button newReg;
 
-    @FXML private TextField courseField;
+    @FXML private ComboBox<String> courseField;
 
     @FXML private Label grandTotal;
 
@@ -41,6 +38,10 @@ public class RegistrationFxController implements Initializable {
 
     public ObservableList<Course> data = FXCollections.observableArrayList(
             new CourseFactory().getcList()
+    );
+
+    public ObservableList<String> options = FXCollections.observableArrayList(
+            new CourseFactory().getcList().stream().map(Course::getId).collect(Collectors.toList())
     );
 
     @Override
@@ -56,6 +57,11 @@ public class RegistrationFxController implements Initializable {
 
         controller = new RegisterCourseController();
         grandTotal.setText(Integer.toString(data.stream().mapToInt(Course::getSubTotal).sum()));
+
+        // Initializes combo-box
+        courseField.setItems(options);
+        courseField.setVisibleRowCount(4);
+        courseField.setValue(options.get(0));
     }
 
     @FXML
@@ -70,7 +76,7 @@ public class RegistrationFxController implements Initializable {
     @FXML
     public void addCourse() {
         CourseFactory factory = new CourseFactory();
-        String courseID = courseField.getText();
+        String courseID = courseField.getValue();
 
         if(findIfInListAlready(courseID)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
