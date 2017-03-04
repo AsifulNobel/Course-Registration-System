@@ -22,7 +22,6 @@
             <TableColumn fx:id="credit" prefWidth="103.0" text="Credit" />
             <TableColumn fx:id="tuitionPerCredit" prefWidth="126.0" text="Tuition/Credit" />
             <TableColumn fx:id="subTotal" prefWidth="126.0" text="Sub Total" />
-            <!--<TableColumn prefWidth="117.0" text="Sub Total" />-->
         </columns>
       </TableView>
    </children>
