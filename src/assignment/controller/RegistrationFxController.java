@@ -9,10 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -35,6 +32,8 @@ public class RegistrationFxController implements Initializable {
     @FXML private Button newReg;
 
     @FXML private TextField courseField;
+
+    @FXML private Label grandTotal;
 
     private RegisterCourseController controller;
 
@@ -62,6 +61,7 @@ public class RegistrationFxController implements Initializable {
         // setting ObersevableList empty clears the table
         data.clear();
         controller.makeNewRegistration();
+        grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
     }
 
     @FXML
@@ -77,5 +77,7 @@ public class RegistrationFxController implements Initializable {
         } else {
             System.out.println("Course not found");
         }
+
+        grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
     }
 }

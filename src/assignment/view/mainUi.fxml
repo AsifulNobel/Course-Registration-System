@@ -24,5 +24,7 @@
             <TableColumn fx:id="subTotal" prefWidth="126.0" text="Sub Total" />
         </columns>
       </TableView>
+      <Label layoutX="363.0" layoutY="338.0" text="Total" />
+      <Label fx:id="grandTotal" layoutX="489.0" layoutY="338.0" text="0"/>
    </children>
 </AnchorPane>
