@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="115.0" layoutY="14.0" mnemonicParsing="false" text="New Registration" />
@@ -17,11 +16,11 @@
       <Button layoutX="115.0" layoutY="87.0" mnemonicParsing="false" text="Add Course" />
       <TableView layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="568.0">
         <columns>
-          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="SL #" />
-          <TableColumn prefWidth="145.0" text="Course Title" />
-            <TableColumn prefWidth="103.0" text="Credit" />
-            <TableColumn prefWidth="126.0" text="Tuition/Credit" />
-            <TableColumn prefWidth="117.0" text="Sub Total" />
+          <!--<TableColumn editable="false" prefWidth="75.0" sortable="false" text="SL #" />-->
+          <TableColumn fx:id="title" prefWidth="145.0" text="Course Title" />
+            <TableColumn fx:id="credit" prefWidth="103.0" text="Credit" />
+            <TableColumn fx:id="tuitionPerCredit" prefWidth="126.0" text="Tuition/Credit" />
+            <!--<TableColumn prefWidth="117.0" text="Sub Total" />-->
         </columns>
       </TableView>
    </children>
