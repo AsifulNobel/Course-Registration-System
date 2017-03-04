@@ -3,10 +3,8 @@ package assignment.controller;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-<<<<<<< HEAD
-=======
+
 import javafx.beans.value.ObservableValue;
->>>>>>> a7951b672ae7d57f1b68e40896d8a9a89975a271
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,7 +32,6 @@ public class RegistrationFxController implements Initializable {
     @FXML private TableColumn<Course, Integer> tuitionPerCredit;
     @FXML private TableColumn<Course, Integer> subTotal;
 
-<<<<<<< HEAD
     @FXML private Button addButton;
     @FXML private Button newReg;
 
@@ -42,8 +39,6 @@ public class RegistrationFxController implements Initializable {
 
     private RegisterCourseController controller;
 
-=======
->>>>>>> a7951b672ae7d57f1b68e40896d8a9a89975a271
     public ObservableList<Course> data = FXCollections.observableArrayList(
             new CourseFactory().getcList()
     );
