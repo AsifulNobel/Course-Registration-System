@@ -14,7 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 
+import javax.swing.*;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -70,15 +72,20 @@ public class RegistrationFxController implements Initializable {
         CourseFactory factory = new CourseFactory();
         String courseID = courseField.getText();
 
-        controller.addCourse(factory.getCourse(courseID));
-        Course courseToAdd = controller.getCourse(courseID);
+        try {
+            controller.addCourse(factory.getCourse(courseID));
+            Course courseToAdd = controller.getCourse(courseID);
 
-        if(courseID != null) {
             data.add(courseToAdd);
-        } else {
-            System.out.println("Course not found");
+            grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("!!!Error!!!");
+            alert.setHeaderText("Can not add the course");
+
+            alert.showAndWait();
         }
 
-        grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
+
     }
 }
