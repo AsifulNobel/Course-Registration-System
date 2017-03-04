@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="115.0" layoutY="14.0" mnemonicParsing="false" text="New Registration" />
+      <Button fx:id="addButton" layoutX="115.0" layoutY="14.0" mnemonicParsing="false" text="New Registration"/>
       <Label layoutX="14.0" layoutY="55.0" text="Course ID" />
       <TextField layoutX="115.0" layoutY="50.0" />
       <Button layoutX="115.0" layoutY="87.0" mnemonicParsing="false" text="Add Course" />
