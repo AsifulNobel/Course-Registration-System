@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
  */
 public class RegistrationFxController implements Initializable {
     @FXML private TableView<Course> table;
-    @FXML private TableColumn<Course, Integer> serial_no;
     @FXML private TableColumn<Course, String> title;
     @FXML private TableColumn<Course, Integer> slNo;
     @FXML private TableColumn<Course, Integer> credit;
@@ -45,7 +44,6 @@ public class RegistrationFxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        serial_no.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Integer>(table.getItems().indexOf(column.getValue())+1));
         title.setCellValueFactory(new PropertyValueFactory<Course, String>("title"));
         credit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("credit"));
         tuitionPerCredit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("tuitionPerCredit"));
