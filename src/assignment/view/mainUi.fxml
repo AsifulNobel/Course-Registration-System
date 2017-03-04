@@ -17,11 +17,11 @@
       <Button layoutX="115.0" layoutY="87.0" mnemonicParsing="false" text="Add Course" />
       <TableView fx:id="table" layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="568.0">
         <columns>
-          <!--<TableColumn editable="false" prefWidth="75.0" sortable="false" text="SL #" />-->
+          <TableColumn fx:id="serial_no" editable="false" prefWidth="75.0" sortable="false" text="SL #" />
           <TableColumn fx:id="title" prefWidth="145.0" text="Course Title" />
             <TableColumn fx:id="credit" prefWidth="103.0" text="Credit" />
             <TableColumn fx:id="tuitionPerCredit" prefWidth="126.0" text="Tuition/Credit" />
-            <!--<TableColumn prefWidth="117.0" text="Sub Total" />-->
+            <TableColumn fx:id="subTotal" prefWidth="117.0" text="Sub Total" />
         </columns>
       </TableView>
    </children>
