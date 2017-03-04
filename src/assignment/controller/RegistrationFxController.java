@@ -72,20 +72,32 @@ public class RegistrationFxController implements Initializable {
         CourseFactory factory = new CourseFactory();
         String courseID = courseField.getText();
 
-        try {
-            controller.addCourse(factory.getCourse(courseID));
-            Course courseToAdd = controller.getCourse(courseID);
-
-            data.add(courseToAdd);
-            grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(findIfInListAlready(courseID)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("!!!Error!!!");
             alert.setHeaderText("Can not add the course");
-
+            alert.setContentText("Course already added");
             alert.showAndWait();
+        } else {
+
+            try {
+                controller.addCourse(factory.getCourse(courseID));
+                Course courseToAdd = controller.getCourse(courseID);
+
+                data.add(courseToAdd);
+                grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("!!!Error!!!");
+                alert.setHeaderText("Can not add the course");
+                alert.setContentText("Course not found in Course Factory");
+                alert.showAndWait();
+            }
         }
+    }
 
-
+    private boolean findIfInListAlready(String id) {
+        boolean isInList = data.stream().anyMatch(course -> course.getId().equals(id));
+        return isInList;
     }
 }
