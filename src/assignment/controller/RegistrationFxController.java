@@ -22,7 +22,7 @@ public class RegistrationFxController implements Initializable {
     @FXML private TableColumn<Course, Integer> credit;
     @FXML private TableColumn<Course, Integer> tuitionPerCredit;
 
-    public static ObservableList<Course> data = FXCollections.observableArrayList(
+    public ObservableList<Course> data = FXCollections.observableArrayList(
 //            new Course("CSE 327", "Soft.Eng.", 3, 5500),
 //            new Course("CSE 440", "Artificial Intel.", 3, 5500)
 
