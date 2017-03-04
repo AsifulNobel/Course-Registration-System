@@ -53,6 +53,7 @@ public class RegistrationFxController implements Initializable {
         slNo.setSortable(false);
 
         controller = new RegisterCourseController();
+        grandTotal.setText(Integer.toString(data.stream().mapToInt(Course::getSubTotal).sum()));
     }
 
     @FXML
