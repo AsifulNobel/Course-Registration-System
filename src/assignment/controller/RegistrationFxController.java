@@ -32,6 +32,8 @@ public class RegistrationFxController implements Initializable {
 
     @FXML private ComboBox<String> courseField;
 
+    @FXML private Label total;
+    @FXML private Label devFee_bdTax;
     @FXML private Label grandTotal;
 
     private RegisterCourseController controller;
@@ -56,7 +58,7 @@ public class RegistrationFxController implements Initializable {
         slNo.setSortable(false);
 
         controller = new RegisterCourseController();
-        grandTotal.setText(Integer.toString(data.stream().mapToInt(Course::getSubTotal).sum()));
+        total.setText(Integer.toString(data.stream().mapToInt(Course::getSubTotal).sum()));
 
         // Initializes combo-box
         courseField.setItems(options);
@@ -70,7 +72,7 @@ public class RegistrationFxController implements Initializable {
         // setting ObersevableList empty clears the table
         data.clear();
         controller.makeNewRegistration();
-        grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
+        total.setText(Integer.toString(controller.getReg().getTotal()));
     }
 
     @FXML
@@ -91,7 +93,7 @@ public class RegistrationFxController implements Initializable {
                 Course courseToAdd = controller.getCourse(courseID);
 
                 data.add(courseToAdd);
-                grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
+                total.setText(Integer.toString(controller.getReg().getTotal()));
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("!!!Error!!!");
