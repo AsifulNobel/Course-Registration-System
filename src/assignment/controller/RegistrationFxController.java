@@ -38,9 +38,7 @@ public class RegistrationFxController implements Initializable {
 
     private RegisterCourseController controller;
 
-    public ObservableList<Course> data = FXCollections.observableArrayList(
-            new CourseFactory().getcList()
-    );
+    public ObservableList<Course> data = FXCollections.observableArrayList();
 
     public ObservableList<String> options = FXCollections.observableArrayList(
             new CourseFactory().getcList().stream().map(Course::getId).collect(Collectors.toList())
@@ -58,7 +56,7 @@ public class RegistrationFxController implements Initializable {
         slNo.setSortable(false);
 
         controller = new RegisterCourseController();
-        total.setText(Integer.toString(data.stream().mapToInt(Course::getSubTotal).sum()));
+        controller.makeNewRegistration();
 
         // Initializes combo-box
         courseField.setItems(options);
