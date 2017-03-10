@@ -2,13 +2,20 @@ package assignment.models;
 
 import sun.awt.image.ImageWatched;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Properties;
+import java.util.StringJoiner;
 
 /**
  * Created by shawon on 3/3/17.
  */
 public class CourseFactory {
     private LinkedList<Course> cList;
+    private static CourseFactory instance;
+    private IExtraFeeCalculator efCalculator;
 
     public CourseFactory() {
 
@@ -25,6 +32,7 @@ public class CourseFactory {
         cList.add(new Course("CSE 311", "Database", 3, 5500));
         cList.add(new Course("CSE 338", "Networking", 3, 5500));
 
+        LoadProperties();
     }
 
     public LinkedList<Course> getcList() {
@@ -38,5 +46,51 @@ public class CourseFactory {
         course = cList.stream().filter(k -> k.getId().equals(id)).findFirst().get();
 
         return course;
+    }
+
+    public static synchronized CourseFactory getInstance() {
+        if(instance == null) {
+            instance = new CourseFactory();
+        }
+
+        return instance;
+    }
+
+    public IExtraFeeCalculator getExtraFeeCalculator() {
+        if (efCalculator == null) {
+            String className = this.getClass().getPackage().getName() + "." +
+                    System.getProperty("IExtraFeeCalculator.class.name");
+            try {
+                efCalculator = (IExtraFeeCalculator) Class.forName(className).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return efCalculator;
+    }
+
+    public void LoadProperties() {
+        FileInputStream propFile = null;
+        Properties prop = new Properties(System.getProperties());
+
+        try {
+            propFile = new FileInputStream( "resources/CourseRegister.config");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            prop.load(propFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // set the system properties
+        System.setProperties(prop);
     }
 }

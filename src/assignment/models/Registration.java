@@ -9,6 +9,7 @@ import java.util.LinkedList;
  */
 public class Registration {
     public LinkedList<Course> courseList;
+    private IExtraFeeCalculator iefc;
 
     public Registration() {
          courseList = new LinkedList<>();
@@ -30,5 +31,15 @@ public class Registration {
         int total = courseList.stream().mapToInt(Course::getSubTotal).sum();
 
         return total;
+    }
+
+    public int getExtraFeeAmount() {
+        iefc = CourseFactory.getInstance().getExtraFeeCalculator();
+
+        return iefc.getExtraAmount(this.getTotal());
+    }
+
+    public int getGrandTotal() {
+        return this.getTotal() + this.getExtraFeeAmount();
     }
 }

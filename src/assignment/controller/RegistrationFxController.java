@@ -64,6 +64,7 @@ public class RegistrationFxController implements Initializable {
         courseField.setItems(options);
         courseField.setVisibleRowCount(4);
         courseField.setValue(options.get(0));
+
     }
 
     @FXML
@@ -73,6 +74,8 @@ public class RegistrationFxController implements Initializable {
         data.clear();
         controller.makeNewRegistration();
         total.setText(Integer.toString(controller.getReg().getTotal()));
+        devFee_bdTax.setText(Integer.toString(0));
+        grandTotal.setText(Integer.toString(0));
     }
 
     @FXML
@@ -94,6 +97,8 @@ public class RegistrationFxController implements Initializable {
 
                 data.add(courseToAdd);
                 total.setText(Integer.toString(controller.getReg().getTotal()));
+                devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
+                grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("!!!Error!!!");
