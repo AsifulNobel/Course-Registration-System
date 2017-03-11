@@ -5,6 +5,7 @@ import sun.awt.image.ImageWatched;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -32,7 +33,7 @@ public class CourseFactory {
         cList.add(new Course("CSE 311", "Database", 3, 5500));
         cList.add(new Course("CSE 338", "Networking", 3, 5500));
 
-        LoadProperties();
+        this.LoadProperties();
     }
 
     public LinkedList<Course> getcList() {
@@ -76,7 +77,7 @@ public class CourseFactory {
 
     public void LoadProperties() {
         FileInputStream propFile = null;
-        Properties prop = new Properties(System.getProperties());
+        Properties prop = new Properties();
 
         try {
             propFile = new FileInputStream( "resources/CourseRegister.config");

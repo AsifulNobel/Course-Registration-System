@@ -37,12 +37,10 @@ public class RegistrationFxController implements Initializable {
     @FXML private Label grandTotal;
 
     private RegisterCourseController controller;
+    private CourseFactory factory;
 
     public ObservableList<Course> data = FXCollections.observableArrayList();
-
-    public ObservableList<String> options = FXCollections.observableArrayList(
-            new CourseFactory().getcList().stream().map(Course::getId).collect(Collectors.toList())
-    );
+    public ObservableList<String> options = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +55,14 @@ public class RegistrationFxController implements Initializable {
 
         controller = new RegisterCourseController();
         controller.makeNewRegistration();
+
+        // To maintain single instance of CourseFactory.
+        // If new CourseFactory() is used, then one instance will be created here.
+        // Again another one will be created when CourseFactory.getInstance method is
+        // called in Registration.getExtraFeeAmount method.
+        factory = CourseFactory.getInstance();
+
+        options.addAll(factory.getcList().stream().map(Course::getId).collect(Collectors.toList()));
 
         // Initializes combo-box
         courseField.setItems(options);
@@ -78,7 +84,6 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     public void addCourse() {
-        CourseFactory factory = new CourseFactory();
         String courseID = courseField.getValue();
 
         if(findIfInListAlready(courseID)) {
