@@ -76,20 +76,30 @@ public class CourseFactory {
     }
 
     public void LoadProperties() {
-        FileInputStream propFile = null;
+//        FileInputStream propFile = null;
         Properties prop = new Properties();
 
-        try {
-            propFile = new FileInputStream( "resources/CourseRegister.config");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            propFile = new FileInputStream( "resources/CourseRegister.config");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            prop.load(propFile);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        try {
+        // minimized try catch block. Java 7 way
+        try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")){
             prop.load(propFile);
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         // set the system properties
         System.setProperties(prop);
