@@ -29,8 +29,10 @@ public class RegistrationFxController implements Initializable {
 
     @FXML private Button addButton;
     @FXML private Button newReg;
+    @FXML private Button calculateDiscount;
 
     @FXML private ComboBox<String> courseField;
+    @FXML private ComboBox<String> bestComboSelector;
 
     @FXML private Label total;
     @FXML private Label devFee_bdTax;
@@ -41,6 +43,8 @@ public class RegistrationFxController implements Initializable {
 
     public ObservableList<Course> data = FXCollections.observableArrayList();
     public ObservableList<String> options = FXCollections.observableArrayList();
+    // public ObservableList<CompositeDiscount> comboOptions = FXCollections.observableArrayList();
+    // populate above list with BestForNSU and BestForStudent text like we did with options
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -115,5 +119,10 @@ public class RegistrationFxController implements Initializable {
     private boolean findIfInListAlready(String id) {
         boolean isInList = data.stream().anyMatch(course -> course.getId().equals(id));
         return isInList;
+    }
+
+    // Does nothing. Just for declaring dummy onAction method
+    private void calculateDiscount() {
+
     }
 }

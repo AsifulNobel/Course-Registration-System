@@ -12,7 +12,7 @@ public class RegistrationFxFrame extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainUi.fxml"));
         primaryStage.setTitle("Course Registration System");
-        primaryStage.setScene(new Scene(root, 600, 425));
+        primaryStage.setScene(new Scene(root, 600, 485));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

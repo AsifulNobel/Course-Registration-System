@@ -27,5 +27,10 @@
       <Label layoutX="331.0" layoutY="394.0" text="Grand Total" />
       <Label fx:id="devFee_bdTax" layoutX="449.0" layoutY="367.0" text="0" />
       <Label fx:id="grandTotal" layoutX="449.0" layoutY="394.0" text="0" />
+      <CheckBox fx:id="excellenceBox" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" text="Academic Excellence" />
+      <CheckBox fx:id="minorityBox" layoutX="14.0" layoutY="368.0" mnemonicParsing="false" text="Aboriginal/Minority Group" />
+      <CheckBox fx:id="freedomBox" layoutX="14.0" layoutY="393.0" mnemonicParsing="false" text="Freedom Fighter" />
+       <ComboBox fx:id="bestComboSelector" layoutX="14.0" layoutY="418.0" prefWidth="150.0" />
+       <Button fx:id="discountButton" layoutX="14.0" layoutY="449.0" mnemonicParsing="false" onAction="#calculateDiscount" text="Calculate Discount" />
    </children>
 </AnchorPane>

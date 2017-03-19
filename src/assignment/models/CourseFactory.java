@@ -1,14 +1,10 @@
 package assignment.models;
 
-import sun.awt.image.ImageWatched;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Properties;
-import java.util.StringJoiner;
 
 /**
  * Created by shawon on 3/3/17.
@@ -76,20 +72,7 @@ public class CourseFactory {
     }
 
     public void LoadProperties() {
-//        FileInputStream propFile = null;
         Properties prop = new Properties();
-
-//        try {
-//            propFile = new FileInputStream( "resources/CourseRegister.config");
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            prop.load(propFile);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         // minimized try catch block. Java 7 way
         try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")){
