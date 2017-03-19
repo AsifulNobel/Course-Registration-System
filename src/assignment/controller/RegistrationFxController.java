@@ -122,6 +122,7 @@ public class RegistrationFxController implements Initializable {
     }
 
     // Does nothing. Just for declaring dummy onAction method
+    @FXML
     private void calculateDiscount() {
 
     }
