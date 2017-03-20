@@ -104,7 +104,6 @@ public class RegistrationFxController implements Initializable {
         controller.getReg().addObserver(new FreedomFighterDiscount());
         controller.getReg().addObserver(new AboroginDiscount());
 
-        controller.getReg().notifyObservers();
     }
 
     @FXML
@@ -117,7 +116,6 @@ public class RegistrationFxController implements Initializable {
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
 
-        controller.getReg().notifyObservers();
     }
 
     @FXML
@@ -141,7 +139,6 @@ public class RegistrationFxController implements Initializable {
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
                 grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
 
-                controller.getReg().notifyObservers();
             } catch (Exception e) {
                 // do nothing
             }
