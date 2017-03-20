@@ -99,6 +99,12 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
         bestComboSelector.setEditable(false);
+
+        controller.getReg().addObserver(new AcademicExcellenceDiscount());
+        controller.getReg().addObserver(new FreedomFighterDiscount());
+        controller.getReg().addObserver(new AboroginDiscount());
+
+        controller.getReg().notifyObservers();
     }
 
     @FXML
@@ -110,6 +116,8 @@ public class RegistrationFxController implements Initializable {
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
+
+        controller.getReg().notifyObservers();
     }
 
     @FXML
@@ -132,6 +140,8 @@ public class RegistrationFxController implements Initializable {
                 total.setText(Integer.toString(controller.getReg().getTotal()));
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
                 grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
+
+                controller.getReg().notifyObservers();
             } catch (Exception e) {
                 // do nothing
             }
