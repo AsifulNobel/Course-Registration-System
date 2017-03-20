@@ -6,6 +6,12 @@ package assignment.models;
 public class BestForStudent extends CompositeDiscount {
     @Override
     public int getTotal(Registration reg) {
-        return super.getTotal(reg);
+        int numberOfStrategies = super.getStrategies().size();
+
+        if(numberOfStrategies >= 2) {
+            super.getStrategies().forEach(k-> k.getTotal(reg));
+        }
+
+        return 0;
     }
 }
