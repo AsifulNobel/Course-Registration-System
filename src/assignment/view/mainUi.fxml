@@ -8,11 +8,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.RegistrationFxController">
    <children>
       <Button fx:id="newReg" layoutX="115.0" layoutY="14.0" mnemonicParsing="false" onAction="#addReg" text="New Registration" />
+       <Label layoutX="31.0" layoutY="55.0" text="Course ID" />
        <ComboBox fx:id="courseField" layoutX="115.0" layoutY="50.0" prefWidth="150.0" />
       <Button fx:id="addButton" layoutX="115.0" layoutY="87.0" mnemonicParsing="false" onAction="#addCourse" text="Add Course" />
       <TableView fx:id="table" layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="568.0">
         <columns>
-          <!--<TableColumn editable="false" prefWidth="75.0" sortable="false" text="SL #" />-->
             <TableColumn fx:id="slNo" prefWidth="50.0" text="SL #" />
             <TableColumn fx:id="title" prefWidth="145.0" text="Course Title" />
             <TableColumn fx:id="credit" prefWidth="103.0" text="Credit" />

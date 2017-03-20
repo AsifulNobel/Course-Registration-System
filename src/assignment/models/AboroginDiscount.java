@@ -13,18 +13,18 @@ public class AboroginDiscount implements IDiscountStrategy, Observer {
 
     public AboroginDiscount(Registration registration) {
         this.registration = registration;
-        total = registration.getGrandTotal();
+        total = registration.getTotalWithoutDiscount();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        total = registration.getGrandTotal();
+        total = registration.getTotalWithoutDiscount();
     }
 
 
     @Override
     public int getTotal(Registration reg) {
-        return (int) (total - total * 0.40);
+        return (int) (total - total * 0.60);
     }
 
 }

@@ -13,12 +13,12 @@ public class FreedomFighterDiscount implements IDiscountStrategy, Observer {
 
     public FreedomFighterDiscount(Registration registration) {
         this.registration = registration;
-        total = registration.getGrandTotal();
+        total = registration.getTotalWithoutDiscount();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-       total =  registration.getGrandTotal();
+        total = registration.getTotalWithoutDiscount();
     }
 
     @Override
@@ -30,6 +30,4 @@ public class FreedomFighterDiscount implements IDiscountStrategy, Observer {
             return total;
         }
     }
-
-
 }

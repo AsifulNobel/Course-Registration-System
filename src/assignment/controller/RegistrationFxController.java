@@ -102,6 +102,10 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
 
+        controller.getReg().addObserver(new AboroginDiscount(controller.getReg()));
+        controller.getReg().addObserver(new AcademicExcellenceDiscount(controller.getReg()));
+        controller.getReg().addObserver(new FreedomFighterDiscount(controller.getReg()));
+        controller.getReg().addObserver(new BeepMaker(controller.getReg()));
     }
 
     @FXML
@@ -136,7 +140,7 @@ public class RegistrationFxController implements Initializable {
                 data.add(courseToAdd);
                 total.setText(Integer.toString(controller.getReg().getTotal()));
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
-                grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
+                grandTotal.setText(Integer.toString(controller.getReg().getTotalWithoutDiscount()));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -156,43 +160,6 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
-//        if(excellenceBox.isSelected()) {
-//            controller.getReg().setDiscountStrategy(new AcademicExcellenceDiscount(controller.getReg()));
-//            int totalAmount = controller.getReg().getTotalWithDiscount();
-//            grandTotal.setText(Integer.toString(totalAmount));
-//
-//            discount.setText(Integer.toString(
-//                    Integer.parseInt(total.getText())
-//                        + Integer.parseInt(devFee_bdTax.getText())
-//                        - Integer.parseInt(grandTotal.getText())
-//                    )
-//            );
-//        }
-//        if(minorityBox.isSelected()) {
-//            controller.getReg().setDiscountStrategy(new AboroginDiscount(controller.getReg()));
-//            int totalAmount = controller.getReg().getTotalWithDiscount();
-//            grandTotal.setText(Integer.toString(totalAmount));
-//
-//            discount.setText(Integer.toString(
-//                    Integer.parseInt(total.getText())
-//                            + Integer.parseInt(devFee_bdTax.getText())
-//                            - Integer.parseInt(grandTotal.getText())
-//                    )
-//            );
-//        }
-//        if(freedomBox.isSelected()) {
-//            controller.getReg().setDiscountStrategy(new FreedomFighterDiscount(controller.getReg()));
-//            int totalAmount = controller.getReg().getTotalWithDiscount();
-//            grandTotal.setText(Integer.toString(totalAmount));
-//
-//            discount.setText(Integer.toString(
-//                    Integer.parseInt(total.getText())
-//                            + Integer.parseInt(devFee_bdTax.getText())
-//                            - Integer.parseInt(grandTotal.getText())
-//                    )
-//            );
-//        }
-
         if(excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
             CompositeDiscount compositeDiscount = new CompositeDiscount(controller.getReg());
 
