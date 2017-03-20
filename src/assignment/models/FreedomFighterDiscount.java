@@ -8,8 +8,11 @@ public class FreedomFighterDiscount implements IDiscountStrategy {
     public int getTotal(Registration reg) {
         int total = reg.getTotal();
         if (reg.getCourseList().size() <= 5) {
-            return total - 20000;
+            total = total - 20000;
+            reg.updateGrandTotal(total);
+            return total;
         } else {
+            reg.updateGrandTotal(total);
             return total;
         }
     }

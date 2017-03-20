@@ -18,6 +18,7 @@ public class CompositeDiscount implements IDiscountStrategy {
     @Override
     public int getTotal(Registration reg) {
         int total = reg.getTotal();
+        reg.updateGrandTotal(total);
         return total;
     }
 

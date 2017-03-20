@@ -9,7 +9,12 @@ public class BestForStudent extends CompositeDiscount {
         int numberOfStrategies = super.getStrategies().size();
 
         if(numberOfStrategies >= 2) {
-            super.getStrategies().forEach(k-> k.getTotal(reg));
+            super.getStrategies().forEach(
+                    k -> {
+                        int total = k.getTotal(reg);
+                        reg.updateGrandTotal(total);
+                    }
+            );
         }
 
         return 0;

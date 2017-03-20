@@ -146,9 +146,15 @@ public class RegistrationFxController implements Initializable {
         return isInList;
     }
 
-    
+
     @FXML
     private void calculateDiscount() {
+        int numStrat = 0;
+
+        if(minorityBox.isSelected()) numStrat++;
+        if(excellenceBox.isSelected()) numStrat++;
+        if(freedomBox.isSelected()) numStrat++;
+
 
     }
 }
