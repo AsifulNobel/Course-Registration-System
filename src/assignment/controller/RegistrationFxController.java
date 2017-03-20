@@ -45,7 +45,7 @@ public class RegistrationFxController implements Initializable {
 
     public ObservableList<Course> data = FXCollections.observableArrayList();
     public ObservableList<String> options = FXCollections.observableArrayList();
-    public ObservableList<CompositeDiscount> comboOptions = FXCollections.observableArrayList();
+    public ObservableList<String> comboOptions = FXCollections.observableArrayList();
     // populate above list with BestForNSU and BestForStudent text like we did with options
 
     @Override
@@ -76,7 +76,12 @@ public class RegistrationFxController implements Initializable {
         courseField.setValue(options.get(0));
 
         // init discount combo box
+        comboOptions.add("None");
+        comboOptions.add("Best For NSU");
+        comboOptions.add("Best For Student");
 
+        bestComboSelector.getItems().addAll(comboOptions);
+        bestComboSelector.setValue(comboOptions.get(0));
     }
 
     @FXML
