@@ -99,7 +99,6 @@ public class RegistrationFxController implements Initializable {
         // add to component
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
-        bestComboSelector.setEditable(false);
 
         controller.getReg().addObserver(new AcademicExcellenceDiscount());
         controller.getReg().addObserver(new FreedomFighterDiscount());
