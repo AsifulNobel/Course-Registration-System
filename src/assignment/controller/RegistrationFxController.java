@@ -1,5 +1,6 @@
 package assignment.controller;
 
+import assignment.models.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -40,10 +41,11 @@ public class RegistrationFxController implements Initializable {
 
     private RegisterCourseController controller;
     private CourseFactory factory;
+    private CompositeDiscount compositeDiscount;
 
     public ObservableList<Course> data = FXCollections.observableArrayList();
     public ObservableList<String> options = FXCollections.observableArrayList();
-    // public ObservableList<CompositeDiscount> comboOptions = FXCollections.observableArrayList();
+    public ObservableList<CompositeDiscount> comboOptions = FXCollections.observableArrayList();
     // populate above list with BestForNSU and BestForStudent text like we did with options
 
     @Override
@@ -68,10 +70,12 @@ public class RegistrationFxController implements Initializable {
 
         options.addAll(factory.getcList().stream().map(Course::getId).collect(Collectors.toList()));
 
-        // Initializes combo-box
+        // Initializes course combo-box
         courseField.setItems(options);
         courseField.setVisibleRowCount(4);
         courseField.setValue(options.get(0));
+
+        // init discount combo box
 
     }
 
