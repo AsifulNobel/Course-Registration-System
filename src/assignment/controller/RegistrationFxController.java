@@ -3,6 +3,7 @@ package assignment.controller;
 import assignment.models.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
+import assignment.models.Registration;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import javafx.collections.FXCollections;
@@ -149,12 +150,5 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
-        int numStrat = 0;
-
-        if(minorityBox.isSelected()) numStrat++;
-        if(excellenceBox.isSelected()) numStrat++;
-        if(freedomBox.isSelected()) numStrat++;
-
-
     }
 }
