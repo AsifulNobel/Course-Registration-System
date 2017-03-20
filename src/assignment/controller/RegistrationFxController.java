@@ -207,6 +207,9 @@ public class RegistrationFxController implements Initializable {
             }
 
             controller.getReg().setDiscountStrategy(compositeDiscount);
+
+            bestComboSelector.setValue(compositeDiscount.getStrategies().size() < 2 ? "Best For NSU" : "Best For Students");
+
             int totalAmount = controller.getReg().getTotalWithDiscount();
             grandTotal.setText(Integer.toString(totalAmount));
 
@@ -216,6 +219,8 @@ public class RegistrationFxController implements Initializable {
                             - Integer.parseInt(grandTotal.getText())
                     )
             );
+
+
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("!!!Error!!!");
