@@ -11,6 +11,7 @@ public class Registration {
     public LinkedList<Course> courseList;
     private IExtraFeeCalculator iefc;
     private int total;
+    private IDiscountStrategy discountStrategy;
 
     public Registration() {
          courseList = new LinkedList<>();
@@ -30,13 +31,27 @@ public class Registration {
     }
 
     public int getTotal() {
-        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
-        return total;
+//        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
+//        return total;
+
+        return discountStrategy.getTotal(this);
     }
+
+//    public int getTotalWithDisount() {
+//        return discountStrategy.getTotal(this);
+//    }
 
     public int getExtraFeeAmount() {
         iefc = CourseFactory.getInstance().getExtraFeeCalculator();
         return iefc.getExtraAmount(this.getTotal());
+    }
+
+    public IDiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
+    }
+
+    public void setDiscountStrategy(IDiscountStrategy discountStrategy) {
+        this.discountStrategy = discountStrategy;
     }
 
     public int getGrandTotal() {

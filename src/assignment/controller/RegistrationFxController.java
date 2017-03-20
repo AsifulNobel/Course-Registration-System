@@ -1,9 +1,6 @@
 package assignment.controller;
 
-import assignment.models.CompositeDiscount;
-import assignment.models.Course;
-import assignment.models.CourseFactory;
-import assignment.models.Registration;
+import assignment.models.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import javafx.collections.FXCollections;
@@ -94,12 +91,11 @@ public class RegistrationFxController implements Initializable {
 
         // init observable dictionary
         comboOptions.add("None");
-        comboOptions.add("Best For NSU");
-        comboOptions.add("Best For Student");
 
         // add to component
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
+        bestComboSelector.setEditable(false);
     }
 
     @FXML
@@ -151,13 +147,27 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
-        int numStrat = 0;
+        CompositeDiscount discountStrat = new CompositeDiscount();
+        Registration reg = controller.getReg();
 
+        if(excellenceBox.isSelected()) discountStrat.add(new AcademicExcellenceDiscount());
+        if(freedomBox.isSelected()) discountStrat.add(new FreedomFighterDiscount());
+        if(minorityBox.isSelected()) discountStrat.add(new AboroginDiscount());
 
-        if(bestComboSelector.getValue().equals("Best For NSU") || bestComboSelector.getValue().equals("None")) {
-            discount.setText("0");
+        int size = discountStrat.getStrategies().size();
+        if(size < 2) {
+            bestComboSelector.setValue("Best for NSU");
+
+            BestForNSU bestForNSU = (BestForNSU) discountStrat;
+            int nsuBest = bestForNSU.getTotal(reg);
+            discount.setText(Integer.toString(nsuBest));
+
         } else {
+            bestComboSelector.setValue("Best for student");
 
+            BestForStudent bestForStudent = (BestForStudent) discountStrat;
+            int studentBest = bestForStudent.getTotal(reg);
+            discount.setText(Integer.toString(studentBest));
         }
     }
 }
