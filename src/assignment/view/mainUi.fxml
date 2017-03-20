@@ -5,10 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.RegistrationFxController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.RegistrationFxController">
    <children>
       <Button fx:id="newReg" layoutX="115.0" layoutY="14.0" mnemonicParsing="false" onAction="#addReg" text="New Registration" />
-      <Label layoutX="14.0" layoutY="55.0" text="Course ID" />
        <ComboBox fx:id="courseField" layoutX="115.0" layoutY="50.0" prefWidth="150.0" />
       <Button fx:id="addButton" layoutX="115.0" layoutY="87.0" mnemonicParsing="false" onAction="#addCourse" text="Add Course" />
       <TableView fx:id="table" layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="568.0">
@@ -24,13 +23,15 @@
       <Label layoutX="353.0" layoutY="338.0" text="Total" />
       <Label fx:id="total" layoutX="449.0" layoutY="338.0" text="0" />
       <Label layoutX="245.0" layoutY="367.0" text="Development Fee / BD Tax" />
-      <Label layoutX="331.0" layoutY="394.0" text="Grand Total" />
+      <Label layoutX="334.0" layoutY="423.0" text="Grand Total" />
       <Label fx:id="devFee_bdTax" layoutX="449.0" layoutY="367.0" text="0" />
-      <Label fx:id="grandTotal" layoutX="449.0" layoutY="394.0" text="0" />
+      <Label fx:id="grandTotal" layoutX="449.0" layoutY="423.0" text="0" />
       <CheckBox fx:id="excellenceBox" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" text="Academic Excellence" />
       <CheckBox fx:id="minorityBox" layoutX="14.0" layoutY="368.0" mnemonicParsing="false" text="Aboriginal/Minority Group" />
       <CheckBox fx:id="freedomBox" layoutX="14.0" layoutY="393.0" mnemonicParsing="false" text="Freedom Fighter" />
        <ComboBox fx:id="bestComboSelector" layoutX="14.0" layoutY="418.0" prefWidth="150.0" />
        <Button fx:id="discountButton" layoutX="14.0" layoutY="449.0" mnemonicParsing="false" onAction="#calculateDiscount" text="Calculate Discount" />
+      <Label layoutX="353.0" layoutY="393.0" text="Discount" />
+      <Label fx:id="discount" layoutX="449.0" layoutY="393.0" text="0" />
    </children>
 </AnchorPane>

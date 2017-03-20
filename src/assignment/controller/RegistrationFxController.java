@@ -39,6 +39,7 @@ public class RegistrationFxController implements Initializable {
     @FXML private Label total;
     @FXML private Label devFee_bdTax;
     @FXML private Label grandTotal;
+    @FXML private Label discount;
 
 
     @FXML private CheckBox excellenceBox;
@@ -150,5 +151,13 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
+        int numStrat = 0;
+
+
+        if(bestComboSelector.getValue().equals("Best For NSU") || bestComboSelector.getValue().equals("None")) {
+            discount.setText("0");
+        } else {
+
+        }
     }
 }
