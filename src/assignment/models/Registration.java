@@ -33,9 +33,9 @@ public class Registration extends Observable {
 
     public int getTotal() {
         total = courseList.stream().mapToInt(Course::getSubTotal).sum();
-        return total;
+//        return total;
 
-//        return discountStrategy.getTotal(this);
+        return discountStrategy.getTotal(this);
     }
 
 

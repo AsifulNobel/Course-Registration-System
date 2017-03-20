@@ -150,9 +150,17 @@ public class RegistrationFxController implements Initializable {
         return isInList;
     }
 
+    private void updateGrandTotalLabel(int newGrandTotal) {
+        grandTotal.setText(Integer.toString(newGrandTotal));
+    }
+
 
     @FXML
     private void calculateDiscount() {
-
+        if(excellenceBox.isSelected()) {
+            controller.getReg().setDiscountStrategy(new AcademicExcellenceDiscount());
+            int totalAmount = controller.getReg().getTotal();
+            total.setText(Integer.toString(totalAmount));
+        }
     }
 }

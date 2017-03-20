@@ -19,7 +19,7 @@ public class AcademicExcellenceDiscount implements IDiscountStrategy, Observer {
 
     @Override
     public int getTotal(Registration reg) {
-        total = reg.getTotal();
+        total = reg.getCourseList().stream().mapToInt(Course::getSubTotal).sum();
         return (int) (total - (total * 0.5));
     }
 
