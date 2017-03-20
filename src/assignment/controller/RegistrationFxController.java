@@ -93,7 +93,8 @@ public class RegistrationFxController implements Initializable {
         // init discount combo box
 
         // init observable dictionary
-        comboOptions.add("None");
+        comboOptions.add("Best For NSU");
+        comboOptions.add("Best For Student");
 
         // add to component
         bestComboSelector.getItems().addAll(comboOptions);
