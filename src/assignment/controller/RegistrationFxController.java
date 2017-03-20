@@ -8,9 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -158,16 +161,12 @@ public class RegistrationFxController implements Initializable {
         if(size < 2) {
             bestComboSelector.setValue("Best for NSU");
 
-            BestForNSU bestForNSU = (BestForNSU) discountStrat;
-            int nsuBest = bestForNSU.getTotal(reg);
-            discount.setText(Integer.toString(nsuBest));
+
 
         } else {
             bestComboSelector.setValue("Best for student");
 
-            BestForStudent bestForStudent = (BestForStudent) discountStrat;
-            int studentBest = bestForStudent.getTotal(reg);
-            discount.setText(Integer.toString(studentBest));
+
         }
     }
 }

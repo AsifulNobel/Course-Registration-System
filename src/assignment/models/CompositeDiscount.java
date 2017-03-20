@@ -9,7 +9,6 @@ import java.util.LinkedList;
 public class CompositeDiscount implements IDiscountStrategy {
 
     private LinkedList<IDiscountStrategy> strategies;
-    private static CompositeDiscount instance;
 
     public CompositeDiscount() {
         strategies = new LinkedList<>();
@@ -17,19 +16,17 @@ public class CompositeDiscount implements IDiscountStrategy {
 
     @Override
     public int getTotal(Registration reg) {
-        int total = reg.getTotal();
-        reg.updateGrandTotal(total);
+        int total = 0;
+
+        if(strategies.size() < 2) {
+            // best for nsu
+
+
+        }
+
         return total;
     }
 
-
-    public static CompositeDiscount getInstance() {
-        if(instance == null) {
-            instance = new CompositeDiscount();
-        }
-
-        return instance;
-    }
 
     public void add(IDiscountStrategy strategy) {
         strategies.add(strategy);
@@ -37,5 +34,9 @@ public class CompositeDiscount implements IDiscountStrategy {
 
     public LinkedList<IDiscountStrategy> getStrategies() {
         return strategies;
+    }
+
+    public void setStrategies(LinkedList<IDiscountStrategy> strategies) {
+        this.strategies = strategies;
     }
 }
