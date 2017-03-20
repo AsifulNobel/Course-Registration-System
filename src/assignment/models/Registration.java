@@ -31,15 +31,12 @@ public class Registration {
     }
 
     public int getTotal() {
-//        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
-//        return total;
+        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
+        return total;
 
-        return discountStrategy.getTotal(this);
+//        return discountStrategy.getTotal(this);
     }
 
-//    public int getTotalWithDisount() {
-//        return discountStrategy.getTotal(this);
-//    }
 
     public int getExtraFeeAmount() {
         iefc = CourseFactory.getInstance().getExtraFeeCalculator();
