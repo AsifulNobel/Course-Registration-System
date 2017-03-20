@@ -133,11 +133,7 @@ public class RegistrationFxController implements Initializable {
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
                 grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("!!!Error!!!");
-                alert.setHeaderText("Can not add the course");
-                alert.setContentText("Course not found in Course Factory");
-                alert.showAndWait();
+                // do nothing
             }
         }
     }
@@ -158,15 +154,18 @@ public class RegistrationFxController implements Initializable {
         if(minorityBox.isSelected()) discountStrat.add(new AboroginDiscount());
 
         int size = discountStrat.getStrategies().size();
+        int total = 0;
+        reg.setDiscountStrategy(discountStrat);
+
         if(size < 2) {
             bestComboSelector.setValue("Best for NSU");
-
-
+            total = reg.getTotal();
 
         } else {
             bestComboSelector.setValue("Best for student");
-
-
+            total = reg.getTotal();
         }
+
+        grandTotal.setText(Integer.toString(total));
     }
 }

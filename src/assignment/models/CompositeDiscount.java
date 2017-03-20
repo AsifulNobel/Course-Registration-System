@@ -1,6 +1,5 @@
 package assignment.models;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -20,8 +19,17 @@ public class CompositeDiscount implements IDiscountStrategy {
 
         if(strategies.size() < 2) {
             // best for nsu
+            BestForNSU bestForNSU = new BestForNSU();
+            bestForNSU.setStrategies(strategies);
 
+            total = bestForNSU.getTotal(reg);
+        } else {
+            // best for student
 
+            BestForStudent bestForStudent = new BestForStudent();
+            bestForStudent.setStrategies(strategies);
+
+            total = bestForStudent.getTotal(reg);
         }
 
         return total;
