@@ -55,7 +55,4 @@ public class Registration {
         return this.getTotal() + this.getExtraFeeAmount();
     }
 
-    public void updateGrandTotal(int newTotal) {
-        total = newTotal;
-    }
 }

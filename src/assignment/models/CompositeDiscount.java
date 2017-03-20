@@ -15,24 +15,7 @@ public class CompositeDiscount implements IDiscountStrategy {
 
     @Override
     public int getTotal(Registration reg) {
-        int total = 0;
-
-        if(strategies.size() < 2) {
-            // best for nsu
-            BestForNSU bestForNSU = new BestForNSU();
-            bestForNSU.setStrategies(strategies);
-
-            total = bestForNSU.getTotal(reg);
-        } else {
-            // best for student
-
-            BestForStudent bestForStudent = new BestForStudent();
-            bestForStudent.setStrategies(strategies);
-
-            total = bestForStudent.getTotal(reg);
-        }
-
-        return total;
+       return 0;
     }
 
 
