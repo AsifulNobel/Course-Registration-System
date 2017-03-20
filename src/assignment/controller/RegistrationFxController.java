@@ -146,26 +146,6 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
-        CompositeDiscount discountStrat = new CompositeDiscount();
-        Registration reg = controller.getReg();
 
-        if(excellenceBox.isSelected()) discountStrat.add(new AcademicExcellenceDiscount());
-        if(freedomBox.isSelected()) discountStrat.add(new FreedomFighterDiscount());
-        if(minorityBox.isSelected()) discountStrat.add(new AboroginDiscount());
-
-        int size = discountStrat.getStrategies().size();
-        int total = 0;
-        reg.setDiscountStrategy(discountStrat);
-
-        if(size < 2) {
-            bestComboSelector.setValue("Best for NSU");
-            total = reg.getTotal();
-
-        } else {
-            bestComboSelector.setValue("Best for student");
-            total = reg.getTotal();
-        }
-
-        grandTotal.setText(Integer.toString(total));
     }
 }

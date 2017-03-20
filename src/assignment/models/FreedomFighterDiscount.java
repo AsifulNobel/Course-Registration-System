@@ -1,9 +1,12 @@
 package assignment.models;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created by shawonashraf on 3/20/17.
  */
-public class FreedomFighterDiscount implements IDiscountStrategy {
+public class FreedomFighterDiscount implements IDiscountStrategy, Observer {
     @Override
     public int getTotal(Registration reg) {
         int total = reg.getTotal();
@@ -13,5 +16,10 @@ public class FreedomFighterDiscount implements IDiscountStrategy {
         } else {
             return total;
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
