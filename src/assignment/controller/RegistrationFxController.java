@@ -54,6 +54,12 @@ public class RegistrationFxController implements Initializable {
     private CompositeDiscount compositeDiscount;
 
 
+    // observers
+
+    private AcademicExcellenceDiscount academicExcellenceDiscount;
+
+
+
 
 
     // observable lists
@@ -100,10 +106,7 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
 
-        controller.getReg().addObserver(new AcademicExcellenceDiscount());
-        controller.getReg().addObserver(new FreedomFighterDiscount());
-        controller.getReg().addObserver(new AboroginDiscount());
-
+        academicExcellenceDiscount = new AcademicExcellenceDiscount(controller.getReg());
     }
 
     @FXML
@@ -140,7 +143,7 @@ public class RegistrationFxController implements Initializable {
                 grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
 
             } catch (Exception e) {
-                // do nothing
+                e.printStackTrace();
             }
         }
     }
@@ -158,7 +161,7 @@ public class RegistrationFxController implements Initializable {
     @FXML
     private void calculateDiscount() {
         if(excellenceBox.isSelected()) {
-            controller.getReg().setDiscountStrategy(new AcademicExcellenceDiscount());
+            controller.getReg().setDiscountStrategy(new AcademicExcellenceDiscount(controller.getReg()));
             int totalAmount = controller.getReg().getTotal();
             total.setText(Integer.toString(totalAmount));
         }

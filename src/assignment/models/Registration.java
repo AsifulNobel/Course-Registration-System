@@ -33,6 +33,13 @@ public class Registration extends Observable {
 
     public int getTotal() {
         total = courseList.stream().mapToInt(Course::getSubTotal).sum();
+        return total;
+
+//        return discountStrategy.getTotal(this);
+    }
+
+    public int getTotalWithDiscount() {
+        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
 //        return total;
 
         return discountStrategy.getTotal(this);
@@ -55,7 +62,11 @@ public class Registration extends Observable {
     public int getGrandTotal() {
         setChanged();
         notifyObservers();
+        if(discountStrategy != null) {
+            return this.getTotalWithDiscount() + this.getExtraFeeAmount();
+        }
         return this.getTotal() + this.getExtraFeeAmount();
+
     }
 
 }

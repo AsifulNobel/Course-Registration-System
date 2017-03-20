@@ -11,15 +11,18 @@ public class AcademicExcellenceDiscount implements IDiscountStrategy, Observer {
     private Registration registration;
     private int total;
 
+    public AcademicExcellenceDiscount(Registration registration) {
+        this.registration = registration;
+        total = registration.getTotal();
+    }
+
     @Override
     public void update(Observable o, Object arg) {
-        if(o == registration) {
-        }
+        total = registration.getTotal();
     }
 
     @Override
     public int getTotal(Registration reg) {
-        total = reg.getCourseList().stream().mapToInt(Course::getSubTotal).sum();
         return (int) (total - (total * 0.5));
     }
 
