@@ -62,10 +62,14 @@ public class Registration extends Observable {
     public int getGrandTotal() {
         setChanged();
         notifyObservers();
+        int grand = 0;
         if(discountStrategy != null) {
-            return this.getTotalWithDiscount() + this.getExtraFeeAmount();
+            grand =  this.getTotalWithDiscount() + this.getExtraFeeAmount();
         }
-        return this.getTotal() + this.getExtraFeeAmount();
+        grand =  this.getTotal() + this.getExtraFeeAmount();
+
+        if(grand < 0) return 0;
+        return grand;
 
     }
 
