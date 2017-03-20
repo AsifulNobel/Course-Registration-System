@@ -39,9 +39,22 @@ public class RegistrationFxController implements Initializable {
     @FXML private Label devFee_bdTax;
     @FXML private Label grandTotal;
 
+
+    @FXML private CheckBox excellenceBox;
+    @FXML private CheckBox minorityBox;
+    @FXML private CheckBox freedomBox;
+
+
+    // helpers
+
     private RegisterCourseController controller;
     private CourseFactory factory;
     private CompositeDiscount compositeDiscount;
+
+
+
+
+    // observable lists
 
     public ObservableList<Course> data = FXCollections.observableArrayList();
     public ObservableList<String> options = FXCollections.observableArrayList();
