@@ -49,10 +49,6 @@ public class Registration extends Observable {
         return iefc.getExtraAmount(this.getTotal());
     }
 
-    public int getTotalWithoutDiscount() {
-        return total + getExtraFeeAmount();
-    }
-
     public IDiscountStrategy getDiscountStrategy() {
         return discountStrategy;
     }

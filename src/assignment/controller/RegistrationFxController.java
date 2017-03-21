@@ -117,7 +117,7 @@ public class RegistrationFxController implements Initializable {
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
-        discount.setText(Integer.toString(0));
+//        discount.setText(Integer.toString(0));
 
     }
 
@@ -140,7 +140,7 @@ public class RegistrationFxController implements Initializable {
                 data.add(courseToAdd);
                 total.setText(Integer.toString(controller.getReg().getTotal()));
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
-                grandTotal.setText(Integer.toString(controller.getReg().getTotalWithoutDiscount()));
+                grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -180,13 +180,14 @@ public class RegistrationFxController implements Initializable {
             int totalAmount = controller.getReg().getTotalWithDiscount();
             grandTotal.setText(Integer.toString(totalAmount));
 
-            discount.setText(Integer.toString(
-                    Integer.parseInt(total.getText())
-                            + Integer.parseInt(devFee_bdTax.getText())
-                            - Integer.parseInt(grandTotal.getText())
-                    )
-            );
-
+//            discount.setText(Integer.toString(
+//                    Integer.parseInt(total.getText())
+//                            + Integer.parseInt(devFee_bdTax.getText())
+//                            - Integer.parseInt(grandTotal.getText())
+//                    )
+//            );
+            devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
+            compositeDiscount.getStrategies().clear();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

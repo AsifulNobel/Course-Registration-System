@@ -15,9 +15,10 @@ public class BestForStudent extends CompositeDiscount {
     @Override
     public int getTotal(Registration reg) {
         int numStrat = getStrategies().size();
+        int highest = Integer.MAX_VALUE;
 
         for(int i = 0; i < numStrat; i++) {
-            total += getStrategies().get(i).getTotal(reg);
+            total = Math.min(getStrategies().get(i).getTotal(reg), highest);
         }
 
         return total;

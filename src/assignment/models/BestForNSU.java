@@ -15,9 +15,10 @@ public class BestForNSU extends CompositeDiscount {
     @Override
     public int getTotal(Registration reg) {
         int numStrat = getStrategies().size();
+        int lowest = Integer.MIN_VALUE;
 
         for(int i = 0; i < numStrat; i++) {
-            total += getStrategies().get(i).getTotal(reg);
+            total = Math.max(getStrategies().get(i).getTotal(reg), lowest);
         }
 
         return total;

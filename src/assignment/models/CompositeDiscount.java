@@ -52,6 +52,10 @@ public class CompositeDiscount implements IDiscountStrategy, Observer {
         strategies.add(strategy);
     }
 
+    public void clear() {
+        strategies.clear();
+    }
+
     public LinkedList<IDiscountStrategy> getStrategies() {
         return strategies;
     }
