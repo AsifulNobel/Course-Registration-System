@@ -19,7 +19,7 @@ public class BestForStudent extends CompositeDiscount {
         int numStrat = getStrategies().size();
         int highest = Integer.MAX_VALUE;
 
-        for(int i = 0; i < numStrat; i++) {
+        for (int i = 0; i < numStrat; i++) {
             total = Math.min(getStrategies().get(i).getTotal(reg), highest);
         }
 

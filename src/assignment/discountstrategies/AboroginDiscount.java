@@ -8,18 +8,13 @@ import java.util.Observer;
 /**
  * Created by shawonashraf on 3/20/17.
  */
-public class AboroginDiscount implements IDiscountStrategy, Observer {
+public class AboroginDiscount implements IDiscountStrategy {
 
     private Registration registration;
     private int total;
 
     public AboroginDiscount(Registration registration) {
         this.registration = registration;
-        total = registration.getTotal();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
         total = registration.getTotal();
     }
 

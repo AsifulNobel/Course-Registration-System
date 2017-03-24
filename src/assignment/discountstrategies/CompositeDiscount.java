@@ -9,7 +9,7 @@ import java.util.Observer;
 /**
  * Created by shawonashraf on 3/20/17.
  */
-public class CompositeDiscount implements IDiscountStrategy, Observer {
+public class CompositeDiscount implements IDiscountStrategy {
 
     private LinkedList<IDiscountStrategy> strategies;
     private Registration registration;
@@ -27,7 +27,7 @@ public class CompositeDiscount implements IDiscountStrategy, Observer {
 
     @Override
     public int getTotal(Registration reg) {
-        if(strategies.size() < 2) {
+        if (strategies.size() < 2) {
             // best for NSU
 
             strategyName = "Best For NSU";
@@ -46,7 +46,7 @@ public class CompositeDiscount implements IDiscountStrategy, Observer {
         }
 
 
-       return total;
+        return total;
     }
 
 
@@ -66,10 +66,6 @@ public class CompositeDiscount implements IDiscountStrategy, Observer {
         this.strategies = strategies;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        total = registration.getGrandTotal();
-    }
 
     public String getStrategyName() {
         return strategyName;
