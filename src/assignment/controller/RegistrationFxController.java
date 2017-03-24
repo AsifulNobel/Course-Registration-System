@@ -5,6 +5,7 @@ import assignment.discountstrategies.AcademicExcellenceDiscount;
 import assignment.discountstrategies.CompositeDiscount;
 import assignment.discountstrategies.FreedomFighterDiscount;
 import assignment.models.*;
+import assignment.observers.BeepMaker;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import javafx.collections.FXCollections;
@@ -104,10 +105,6 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
 
-        controller.getReg().addObserver(new AboroginDiscount(controller.getReg()));
-        controller.getReg().addObserver(new AcademicExcellenceDiscount(controller.getReg()));
-        controller.getReg().addObserver(new FreedomFighterDiscount(controller.getReg()));
-        controller.getReg().addObserver(new BeepMaker(controller.getReg()));
     }
 
     @FXML
