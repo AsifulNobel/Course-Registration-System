@@ -1,22 +1,16 @@
 package assignment.controller;
 
-import assignment.discountstrategies.AboroginDiscount;
-import assignment.discountstrategies.AcademicExcellenceDiscount;
 import assignment.discountstrategies.CompositeDiscount;
-import assignment.discountstrategies.FreedomFighterDiscount;
-import assignment.models.*;
+import assignment.models.Course;
+import assignment.models.CourseFactory;
 import assignment.observers.BeepMaker;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,29 +20,47 @@ import java.util.stream.Collectors;
  * Created by nobel on 04/03/17.
  */
 public class RegistrationFxController implements Initializable {
-    @FXML private TableView<Course> table;
-    @FXML private TableColumn<Course, String> title;
-    @FXML private TableColumn<Course, Integer> slNo;
-    @FXML private TableColumn<Course, Integer> credit;
-    @FXML private TableColumn<Course, Integer> tuitionPerCredit;
-    @FXML private TableColumn<Course, Integer> subTotal;
+    @FXML
+    private TableView<Course> table;
+    @FXML
+    private TableColumn<Course, String> title;
+    @FXML
+    private TableColumn<Course, Integer> slNo;
+    @FXML
+    private TableColumn<Course, Integer> credit;
+    @FXML
+    private TableColumn<Course, Integer> tuitionPerCredit;
+    @FXML
+    private TableColumn<Course, Integer> subTotal;
 
-    @FXML private Button addButton;
-    @FXML private Button newReg;
-    @FXML private Button calculateDiscount;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button newReg;
+    @FXML
+    private Button calculateDiscount;
 
-    @FXML private ComboBox<String> courseField;
-    @FXML private ComboBox<String> bestComboSelector;
+    @FXML
+    private ComboBox<String> courseField;
+    @FXML
+    private ComboBox<String> bestComboSelector;
 
-    @FXML private Label total;
-    @FXML private Label devFee_bdTax;
-    @FXML private Label grandTotal;
-    @FXML private Label discount;
+    @FXML
+    private Label total;
+    @FXML
+    private Label devFee_bdTax;
+    @FXML
+    private Label grandTotal;
+    @FXML
+    private Label discount;
 
 
-    @FXML private CheckBox excellenceBox;
-    @FXML private CheckBox minorityBox;
-    @FXML private CheckBox freedomBox;
+    @FXML
+    private CheckBox excellenceBox;
+    @FXML
+    private CheckBox minorityBox;
+    @FXML
+    private CheckBox freedomBox;
 
 
     // helpers
@@ -105,6 +117,8 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.getItems().addAll(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
 
+        // add observer
+        controller.getReg().addObserver(new BeepMaker(controller.getReg()));
     }
 
     @FXML
@@ -124,7 +138,7 @@ public class RegistrationFxController implements Initializable {
     public void addCourse() {
         String courseID = courseField.getValue();
 
-        if(findIfInListAlready(courseID)) {
+        if (findIfInListAlready(courseID)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("!!!Error!!!");
             alert.setHeaderText("Can not add the course");
@@ -159,41 +173,7 @@ public class RegistrationFxController implements Initializable {
 
     @FXML
     private void calculateDiscount() {
-        if(excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
-            CompositeDiscount compositeDiscount = new CompositeDiscount(controller.getReg());
-
-            if (excellenceBox.isSelected()) {
-                compositeDiscount.add(new AcademicExcellenceDiscount(controller.getReg()));
-            }
-            if (minorityBox.isSelected()) {
-                compositeDiscount.add(new AboroginDiscount(controller.getReg()));
-            }
-            if (freedomBox.isSelected()) {
-                compositeDiscount.add(new FreedomFighterDiscount(controller.getReg()));
-            }
-
-            controller.getReg().setDiscountStrategy(compositeDiscount);
-
-            bestComboSelector.setValue(compositeDiscount.getStrategies().size() < 2 ? "Best For NSU" : "Best For Students");
-
-            int totalAmount = controller.getReg().getTotalWithDiscount();
-            grandTotal.setText(Integer.toString(totalAmount));
-
-//            discount.setText(Integer.toString(
-//                    Integer.parseInt(total.getText())
-//                            + Integer.parseInt(devFee_bdTax.getText())
-//                            - Integer.parseInt(grandTotal.getText())
-//                    )
-//            );
-            devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
-            compositeDiscount.getStrategies().clear();
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("!!!Error!!!");
-            alert.setHeaderText("Can not get the discount");
-            alert.setContentText("No policy selected");
-            alert.showAndWait();
-        }
+        // need implementation
     }
+
 }

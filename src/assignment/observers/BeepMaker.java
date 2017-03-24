@@ -1,5 +1,12 @@
 package assignment.observers;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +23,13 @@ public class BeepMaker implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(observableObject == o) {
-
+            String filePath = "resources/beep.wav";
+            try(InputStream in = new FileInputStream(filePath)) {
+                AudioStream audioStream = new AudioStream(in);
+                AudioPlayer.player.start(in);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 }
