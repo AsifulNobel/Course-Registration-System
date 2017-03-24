@@ -1,4 +1,6 @@
-package assignment.models;
+package assignment.discountstrategies;
+
+import assignment.models.Registration;
 
 import java.util.Observable;
 import java.util.Observer;

@@ -1,7 +1,10 @@
 package assignment.controller;
 
+import assignment.discountstrategies.AboroginDiscount;
+import assignment.discountstrategies.AcademicExcellenceDiscount;
+import assignment.discountstrategies.CompositeDiscount;
+import assignment.discountstrategies.FreedomFighterDiscount;
 import assignment.models.*;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import javafx.collections.FXCollections;
@@ -14,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;

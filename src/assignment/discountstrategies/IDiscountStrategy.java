@@ -1,4 +1,6 @@
-package assignment.models;
+package assignment.discountstrategies;
+
+import assignment.models.Registration;
 
 /**
  * Created by shawonashraf on 3/20/17.

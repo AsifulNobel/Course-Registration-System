@@ -1,5 +1,7 @@
 package assignment.models;
 
+import assignment.discountstrategies.IDiscountStrategy;
+
 import java.util.LinkedList;
 import java.util.Observable;
 

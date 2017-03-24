@@ -1,13 +1,15 @@
-package assignment.models;
+package assignment.discountstrategies;
+
+import assignment.models.Registration;
 
 /**
  * Created by shawonashraf on 3/20/17.
  */
-public class BestForNSU extends CompositeDiscount {
+public class BestForStudent extends CompositeDiscount {
 
     private int total;
 
-    public BestForNSU() {
+    public BestForStudent() {
         super();
         total = 0;
     }
@@ -15,10 +17,10 @@ public class BestForNSU extends CompositeDiscount {
     @Override
     public int getTotal(Registration reg) {
         int numStrat = getStrategies().size();
-        int lowest = Integer.MIN_VALUE;
+        int highest = Integer.MAX_VALUE;
 
         for(int i = 0; i < numStrat; i++) {
-            total = Math.max(getStrategies().get(i).getTotal(reg), lowest);
+            total = Math.min(getStrategies().get(i).getTotal(reg), highest);
         }
 
         return total;
