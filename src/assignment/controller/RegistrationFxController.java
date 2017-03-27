@@ -186,6 +186,7 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
-        System.out.println("Grand Total has been updated ... @ " + LocalDateTime.now());
+        LocalDateTime c = LocalDateTime.now();
+        System.out.println("Grand Total has been updated ... @ " + c);
     }
 }
