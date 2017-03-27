@@ -3,8 +3,6 @@ package assignment.controller;
 import assignment.discountstrategies.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
-import assignment.models.Registration;
-import assignment.notifiers.BeepMaker;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,12 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.media.AudioClip;
 
-import java.io.File;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -79,7 +74,6 @@ public class RegistrationFxController implements Initializable, Observer {
 
     // notifiers
 
-    BeepMaker beepBeep;
 
     // observable lists
 
@@ -187,6 +181,6 @@ public class RegistrationFxController implements Initializable, Observer {
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
         LocalDateTime c = LocalDateTime.now();
-        System.out.println("Grand Total has been updated ... @ " + c);
+        System.out.println("Grand Total has been updated ... @ " + c.toString());
     }
 }
