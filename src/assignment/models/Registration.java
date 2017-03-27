@@ -44,21 +44,13 @@ public class Registration extends Observable {
         return total;
     }
 
-    public int calculateGrandTotal() {
-        int gT = this.getTotal() + this.getExtraFeeAmount();
-        return gT;
+    public void calculateGrandTotal() {
+        grandTotal = this.getTotal() + this.getExtraFeeAmount();
+        setChanged();
+        notifyObservers();
     }
 
     public int getGrandTotal() {
-        int gT = calculateGrandTotal();
-
-        if(gT != grandTotal) {
-            setChanged();
-            notifyObservers();
-
-            grandTotal = gT;
-        }
-
         return grandTotal;
     }
 
