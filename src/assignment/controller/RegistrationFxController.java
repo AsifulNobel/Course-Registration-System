@@ -180,5 +180,6 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("Grand Total has been updated ... @ " + new Date().getTime());
+        BeepMaker.playBeep();
     }
 }
