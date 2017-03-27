@@ -11,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.media.AudioClip;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Date;
 import java.util.Observable;
@@ -180,7 +182,5 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("Grand Total has been updated ... @ " + new Date().getTime());
-//        Thread beepMakerThread = new Thread(new BeepMaker());
-        new BeepMaker().playBeep();
     }
 }

@@ -15,12 +15,14 @@ import java.net.URI;
 /**
  * Created by nobel on 21/03/17.
  */
-public class BeepMaker {
+public class BeepMaker implements Runnable {
 
-    public void playBeep() {
-        Media sound = new Media(new File("resources/beep.wav").toURI().toString());
-        MediaPlayer soundPlayer = new MediaPlayer(sound);
-        soundPlayer.play();
+    @Override
+    public void run() {
+        playBeep();
+    }
+
+    public synchronized void playBeep() {
     }
 
 }
