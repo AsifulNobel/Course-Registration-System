@@ -3,6 +3,7 @@ package assignment.controller;
 import assignment.discountstrategies.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
+import assignment.notifiers.BeepMaker;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,7 +181,6 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
-        LocalDateTime c = LocalDateTime.now();
-        System.out.println("Grand Total has been updated ... @ " + c.toString());
+        System.out.println("Update() called");
     }
 }

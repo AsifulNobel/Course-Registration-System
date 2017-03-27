@@ -11,18 +11,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
+import java.time.LocalDateTime;
 
 /**
  * Created by nobel on 21/03/17.
  */
-public class BeepMaker implements Runnable {
-
-    @Override
-    public void run() {
-        playBeep();
-    }
-
-    public synchronized void playBeep() {
-    }
-
+public class BeepMaker {
 }
