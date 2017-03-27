@@ -130,8 +130,7 @@ public class RegistrationFxController implements Initializable {
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
-//        discount.setText(Integer.toString(0));
-
+        discount.setText(Integer.toString(0));
     }
 
     @FXML
@@ -174,6 +173,7 @@ public class RegistrationFxController implements Initializable {
     @FXML
     private void calculateDiscount() {
         // need implementation
+
     }
 
 }

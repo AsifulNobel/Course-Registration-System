@@ -14,6 +14,7 @@ public class Registration extends Observable {
     public LinkedList<Course> courseList;
     private IExtraFeeCalculator iefc;
     private int total;
+    private int grandTotal;
     private IDiscountStrategy discountStrategy;
 
     public Registration() {
@@ -34,15 +35,12 @@ public class Registration extends Observable {
     }
 
     public int getTotal() {
-        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
-
+        if(discountStrategy == null) {
+            total = courseList.stream().mapToInt(Course::getSubTotal).sum();
+        } else {
+            total = discountStrategy.getTotal(this);
+        }
         return total;
-    }
-
-    public int getTotalWithDiscount() {
-        total = courseList.stream().mapToInt(Course::getSubTotal).sum();
-
-        return discountStrategy.getTotal(this);
     }
 
 
@@ -57,23 +55,6 @@ public class Registration extends Observable {
 
     public void setDiscountStrategy(IDiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
-    }
-
-    public int getGrandTotal() {
-        clearChanged();
-        setChanged();
-        notifyObservers();
-
-        int grand = 0;
-
-        if(discountStrategy != null) {
-            grand =  this.getTotalWithDiscount() + this.getExtraFeeAmount();
-        }
-        grand =  this.getTotal() + this.getExtraFeeAmount();
-
-        if(grand < 0) return 0;
-        return grand;
-
     }
 
 }
