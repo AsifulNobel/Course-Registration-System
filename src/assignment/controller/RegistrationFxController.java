@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -121,8 +122,7 @@ public class RegistrationFxController implements Initializable, Observer {
         bestComboSelector.setValue(comboOptions.get(0));
 
         // add observer
-        beepBeep = new BeepMaker(controller.getReg());
-        controller.getReg().addObserver(beepBeep);
+        controller.getReg().addObserver(this);
     }
 
     @FXML
@@ -131,6 +131,10 @@ public class RegistrationFxController implements Initializable, Observer {
         // setting ObersevableList empty clears the table
         data.clear();
         controller.makeNewRegistration();
+
+        // add observer for the new reg object
+        controller.getReg().addObserver(this);
+
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
@@ -171,11 +175,10 @@ public class RegistrationFxController implements Initializable, Observer {
     @FXML
     private void calculateDiscount() {
         // need implementation
-
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
+        System.out.println("Grand Total has been updated ... @ " + new Date().getTime());
     }
 }
