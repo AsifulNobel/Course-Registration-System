@@ -16,6 +16,7 @@ import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
@@ -185,6 +186,6 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
-        System.out.println("Grand Total has been updated ... @ " + new Date().getTime());
+        System.out.println("Grand Total has been updated ... @ " + LocalDateTime.now());
     }
 }
