@@ -3,7 +3,7 @@ package assignment.controller;
 import assignment.discountstrategies.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
-import assignment.observers.BeepMaker;
+import assignment.notifiers.BeepMaker;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +13,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
  * Created by nobel on 04/03/17.
  */
-public class RegistrationFxController implements Initializable {
+public class RegistrationFxController implements Initializable, Observer {
     @FXML
     private TableView<Course> table;
     @FXML
@@ -70,7 +72,7 @@ public class RegistrationFxController implements Initializable {
     private CompositeDiscount compositeDiscount;
 
 
-    // observers
+    // notifiers
 
     BeepMaker beepBeep;
 
@@ -172,4 +174,8 @@ public class RegistrationFxController implements Initializable {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 }
