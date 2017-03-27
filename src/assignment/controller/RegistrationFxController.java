@@ -180,7 +180,7 @@ public class RegistrationFxController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("Grand Total has been updated ... @ " + new Date().getTime());
-        Thread beepMakerThread = new Thread(new BeepMaker());
-        beepMakerThread.start();
+//        Thread beepMakerThread = new Thread(new BeepMaker());
+        new BeepMaker().playBeep();
     }
 }
