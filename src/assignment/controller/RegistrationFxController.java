@@ -165,11 +165,6 @@ public class RegistrationFxController implements Initializable {
         return isInList;
     }
 
-    private void updateGrandTotalLabel(int newGrandTotal) {
-        grandTotal.setText(Integer.toString(newGrandTotal));
-    }
-
-
     @FXML
     private void calculateDiscount() {
         // need implementation
