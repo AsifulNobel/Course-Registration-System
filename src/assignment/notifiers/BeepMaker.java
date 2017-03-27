@@ -7,6 +7,7 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
@@ -17,7 +18,9 @@ import java.net.URI;
 public class BeepMaker {
 
     public void playBeep() {
-
+        Media sound = new Media(new File("resources/beep.wav").toURI().toString());
+        MediaPlayer soundPlayer = new MediaPlayer(sound);
+        soundPlayer.play();
     }
 
 }
