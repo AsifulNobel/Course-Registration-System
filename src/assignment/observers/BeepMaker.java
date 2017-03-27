@@ -24,7 +24,8 @@ public class BeepMaker implements Observer {
     public void update(Observable o, Object arg) {
         if(observableObject != o) {
             observableObject = o;
-            playBeep();
+            System.out.println("GrandTotal  has been updated.");
+//            playBeep();
         }
     }
 

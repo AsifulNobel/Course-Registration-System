@@ -72,6 +72,7 @@ public class RegistrationFxController implements Initializable {
 
     // observers
 
+    BeepMaker beepBeep;
 
     // observable lists
 
@@ -118,7 +119,8 @@ public class RegistrationFxController implements Initializable {
         bestComboSelector.setValue(comboOptions.get(0));
 
         // add observer
-        controller.getReg().addObserver(new BeepMaker(controller.getReg()));
+        beepBeep = new BeepMaker(controller.getReg());
+        controller.getReg().addObserver(beepBeep);
     }
 
     @FXML
@@ -152,8 +154,7 @@ public class RegistrationFxController implements Initializable {
                 data.add(courseToAdd);
                 total.setText(Integer.toString(controller.getReg().getTotal()));
                 devFee_bdTax.setText(Integer.toString(controller.getReg().getExtraFeeAmount()));
-                grandTotal.setText(Integer.toString(controller.getReg().getTotal()));
-
+                grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
             } catch (Exception e) {
                 e.printStackTrace();
             }

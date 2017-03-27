@@ -20,6 +20,7 @@ public class Registration extends Observable {
     public Registration() {
          courseList = new LinkedList<>();
          total = 0;
+         grandTotal = 0;
     }
 
     public LinkedList<Course> getCourseList() {
@@ -41,6 +42,24 @@ public class Registration extends Observable {
             total = discountStrategy.getTotal(this);
         }
         return total;
+    }
+
+    public int calculateGrandTotal() {
+        int gT = this.getTotal() + this.getExtraFeeAmount();
+        return gT;
+    }
+
+    public int getGrandTotal() {
+        int gT = calculateGrandTotal();
+
+        if(gT != grandTotal) {
+            setChanged();
+            notifyObservers();
+
+            grandTotal = gT;
+        }
+
+        return grandTotal;
     }
 
 
