@@ -12,11 +12,11 @@ import java.io.InputStream;
 public class BeepMaker {
     private static void playBeep() {
         String filePath = "resources/beep.wav";
-        try(InputStream in = new FileInputStream(filePath)) {
+        try (InputStream in = new FileInputStream(filePath)) {
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(in);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
