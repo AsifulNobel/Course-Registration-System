@@ -22,12 +22,13 @@ public class BeepMaker implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(observableObject == o) {
-
+        if(observableObject != o) {
+            observableObject = o;
+            playBeep();
         }
     }
 
-    public void playBeep() {
+    private static void playBeep() {
         String filePath = "resources/beep.wav";
         try(InputStream in = new FileInputStream(filePath)) {
             AudioStream audioStream = new AudioStream(in);
