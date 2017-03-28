@@ -175,13 +175,11 @@ public class RegistrationFxController implements Initializable, Observer {
     @FXML
     private void calculateDiscount() {
         // need implementation
-        new BeepMaker().playBeep();
     }
 
     @Override
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
-        System.out.println("Update() called");
         BeepMaker.playBeep();
     }
 }
