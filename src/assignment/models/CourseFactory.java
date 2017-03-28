@@ -16,6 +16,7 @@ public class CourseFactory {
     private static CourseFactory instance;
     private IExtraFeeCalculator efCalculator;
     private IDiscountStrategy discountStrategy;
+    private String selectedStrategy;
 
     public CourseFactory() {
 
@@ -39,6 +40,13 @@ public class CourseFactory {
         return cList;
     }
 
+    public String getSelectedStrategy() {
+        return selectedStrategy;
+    }
+
+    public void setSelectedStrategy(String selectedStrategy) {
+        this.selectedStrategy = selectedStrategy;
+    }
 
     public Course getCourse(String id) {
         Course course;
@@ -49,7 +57,7 @@ public class CourseFactory {
     }
 
     public static synchronized CourseFactory getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new CourseFactory();
         }
 
@@ -78,9 +86,9 @@ public class CourseFactory {
         Properties prop = new Properties();
 
         // minimized try catch block. Java 7 way
-        try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")){
+        try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")) {
             prop.load(propFile);
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,9 +97,24 @@ public class CourseFactory {
 
         // set the system properties
         System.setProperty("IExtraFeeCalculator.class.name", prop.getProperty("IExtraFeeCalculator.class.name"));
+        System.setProperty("BestForNSU", prop.getProperty("BestForNSU.class.name"));
+        System.setProperty("BestForStudent", prop.getProperty("BestForStudent.class.name"));
     }
 
     public IDiscountStrategy getDiscountStrategy() {
+        String className = this.getClass().getPackage().getName() + "." +
+                System.getProperty(getSelectedStrategy());
+
+        try {
+            discountStrategy = (IDiscountStrategy) Class.forName(className).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         return discountStrategy;
     }
 }

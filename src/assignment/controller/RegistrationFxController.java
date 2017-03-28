@@ -175,6 +175,19 @@ public class RegistrationFxController implements Initializable, Observer {
     @FXML
     private void calculateDiscount() {
         // need implementation
+        if(excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
+            String userPolicy = bestComboSelector.getValue();
+
+            if (userPolicy.equals("Best For NSU")) {
+               factory.setSelectedStrategy(userPolicy.replaceAll(" ", ""));
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("!!!Error!!!");
+            alert.setHeaderText("NO POLICY SELECTED");
+            alert.setContentText("Select policy/policies");
+            alert.showAndWait();
+        }
     }
 
     @Override
