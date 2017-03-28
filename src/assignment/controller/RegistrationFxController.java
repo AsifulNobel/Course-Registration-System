@@ -182,5 +182,6 @@ public class RegistrationFxController implements Initializable, Observer {
     public void update(Observable o, Object arg) {
         grandTotal.setText(Integer.toString(controller.getReg().getGrandTotal()));
         System.out.println("Update() called");
+        BeepMaker.playBeep();
     }
 }

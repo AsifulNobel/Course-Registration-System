@@ -85,6 +85,6 @@ public class CourseFactory {
 
 
         // set the system properties
-        System.setProperties(prop);
+        System.setProperty("IExtraFeeCalculator.class.name", prop.getProperty("IExtraFeeCalculator.class.name"));
     }
 }
