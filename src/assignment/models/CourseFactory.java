@@ -1,5 +1,7 @@
 package assignment.models;
 
+import assignment.discountstrategies.IDiscountStrategy;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +15,7 @@ public class CourseFactory {
     private LinkedList<Course> cList;
     private static CourseFactory instance;
     private IExtraFeeCalculator efCalculator;
+    private IDiscountStrategy discountStrategy;
 
     public CourseFactory() {
 
@@ -86,5 +89,9 @@ public class CourseFactory {
 
         // set the system properties
         System.setProperty("IExtraFeeCalculator.class.name", prop.getProperty("IExtraFeeCalculator.class.name"));
+    }
+
+    public IDiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
     }
 }
