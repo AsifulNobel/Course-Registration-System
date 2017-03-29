@@ -2,7 +2,6 @@ package assignment.models;
 
 import assignment.discountstrategies.IDiscountStrategy;
 
-import javax.print.DocFlavor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,7 +17,8 @@ public class CourseFactory {
     private static CourseFactory instance;
     private IExtraFeeCalculator efCalculator;
     private IDiscountStrategy discountStrategy;
-    private String selectedStrategy;
+    private Class<?> discountStrategyGetter;
+    private String selectedPolicy;
     private Map<String, Boolean> policySelects;
     private int discount;
 
@@ -44,12 +44,12 @@ public class CourseFactory {
         return cList;
     }
 
-    public String getSelectedStrategy() {
-        return selectedStrategy;
+    public String getSelectedPolicy() {
+        return selectedPolicy;
     }
 
-    public void setSelectedStrategy(String selectedStrategy) {
-        this.selectedStrategy = selectedStrategy;
+    public void setSelectedPolicy(String selectedPolicy) {
+        this.selectedPolicy = selectedPolicy;
     }
 
     public Course getCourse(String id) {
@@ -106,19 +106,6 @@ public class CourseFactory {
     }
 
     public IDiscountStrategy getDiscountStrategy() {
-        String strategyName = getSelectedStrategy();
-        String className = System.getProperty(strategyName);
-
-        try {
-            discountStrategy = (IDiscountStrategy) Class.forName(className).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         return discountStrategy;
     }
 
@@ -135,6 +122,5 @@ public class CourseFactory {
     }
 
     public void calcDiscount() {
-        this.discountStrategy = getDiscountStrategy();
     }
 }

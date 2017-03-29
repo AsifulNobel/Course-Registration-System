@@ -4,7 +4,6 @@ import assignment.discountstrategies.CompositeDiscount;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import assignment.notifiers.BeepMaker;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -177,7 +176,7 @@ public class RegistrationFxController implements Initializable, Observer {
         if (excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
             String userPolicy = bestComboSelector.getValue();
 
-            factory.setSelectedStrategy(userPolicy.replaceAll(" ", ""));
+            factory.setSelectedPolicy(userPolicy.replaceAll(" ", ""));
             Map<String, Boolean> policySelects = new HashMap<>();
 
             policySelects.put("excellence", excellenceBox.isSelected());
