@@ -2,10 +2,12 @@ package assignment.models;
 
 import assignment.discountstrategies.IDiscountStrategy;
 
+import javax.print.DocFlavor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -17,6 +19,8 @@ public class CourseFactory {
     private IExtraFeeCalculator efCalculator;
     private IDiscountStrategy discountStrategy;
     private String selectedStrategy;
+    private Map<String, Boolean> policySelects;
+    private int discount;
 
     public CourseFactory() {
 
@@ -102,8 +106,8 @@ public class CourseFactory {
     }
 
     public IDiscountStrategy getDiscountStrategy() {
-        String className = this.getClass().getPackage().getName() + "." +
-                System.getProperty(getSelectedStrategy());
+        String strategyName = getSelectedStrategy();
+        String className = System.getProperty(strategyName);
 
         try {
             discountStrategy = (IDiscountStrategy) Class.forName(className).newInstance();
@@ -116,5 +120,21 @@ public class CourseFactory {
         }
 
         return discountStrategy;
+    }
+
+    public Map<String, Boolean> getPolicySelects() {
+        return policySelects;
+    }
+
+    public void setPolicySelects(Map<String, Boolean> policySelects) {
+        this.policySelects = policySelects;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void calcDiscount() {
+        this.discountStrategy = getDiscountStrategy();
     }
 }
