@@ -1,10 +1,12 @@
 package assignment.observers;
 
+import javafx.scene.media.AudioClip;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Observable;
@@ -22,18 +24,20 @@ public class BeepMaker implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(observableObject != o) {
-            observableObject = o;
-            System.out.println("GrandTotal  has been updated.");
-//            playBeep();
+        if(observableObject == o) {
+//            observableObject = o;
+            System.out.println("GrandTotal has been updated.");
+            playBeep();
         }
     }
 
-    private static void playBeep() {
+    private void playBeep() {
         String filePath = "resources/beep.wav";
-        try(InputStream in = new FileInputStream(filePath)) {
-            AudioStream audioStream = new AudioStream(in);
-            AudioPlayer.player.start(in);
+        try {
+            URL path = getClass().getResource(filePath);
+            
+            AudioClip a = new AudioClip(path.toString());
+            a.play();
         } catch (Exception e) {
             System.out.println(e);
         }

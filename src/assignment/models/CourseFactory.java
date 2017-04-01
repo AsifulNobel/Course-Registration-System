@@ -3,6 +3,7 @@ package assignment.models;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -77,14 +78,17 @@ public class CourseFactory {
         // minimized try catch block. Java 7 way
         try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")){
             prop.load(propFile);
+            Enumeration props = prop.propertyNames();
+
+            while (props.hasMoreElements()) {
+                String temp = (String) props.nextElement();
+                System.setProperty(temp, prop.getProperty(temp));
+            }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-        // set the system properties
-        System.setProperties(prop);
     }
 }
