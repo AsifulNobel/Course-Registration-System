@@ -1,15 +1,19 @@
 package assignment.models;
 
+import assignment.discountstrategies.IDiscountStrategy;
+
 import java.util.LinkedList;
+import java.util.Observable;
 
 /**
  * Created by nobel
  * modified by shawon
  * on 03/03/17.
  */
-public class Registration {
+public class Registration extends Observable {
     public LinkedList<Course> courseList;
     private IExtraFeeCalculator iefc;
+    private IDiscountStrategy discountStrategy;
 
     public Registration() {
          courseList = new LinkedList<>();
@@ -41,5 +45,20 @@ public class Registration {
 
     public int getGrandTotal() {
         return this.getTotal() + this.getExtraFeeAmount();
+    }
+
+    public int getDiscountedGrandTotal() {
+        return discountStrategy.getTotal(this) + this.getExtraFeeAmount();
+    }
+
+    public IDiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
+    }
+
+    public void setDiscountStrategy(IDiscountStrategy discountStrategy) {
+        this.discountStrategy = discountStrategy;
+
+        setChanged();
+        notifyObservers();
     }
 }

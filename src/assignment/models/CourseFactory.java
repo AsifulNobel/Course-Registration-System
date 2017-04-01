@@ -1,14 +1,10 @@
 package assignment.models;
 
-import sun.awt.image.ImageWatched;
+import assignment.discountstrategies.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Enumeration;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
-import java.util.Properties;
-import java.util.StringJoiner;
 
 /**
  * Created by shawon on 3/3/17.
@@ -32,8 +28,6 @@ public class CourseFactory {
         cList.add(new Course("CSE 215", "Prog.Lang.2", 4, 5500));
         cList.add(new Course("CSE 311", "Database", 3, 5500));
         cList.add(new Course("CSE 338", "Networking", 3, 5500));
-
-        this.LoadProperties();
     }
 
     public LinkedList<Course> getcList() {
@@ -63,11 +57,7 @@ public class CourseFactory {
                     System.getProperty("IExtraFeeCalculator.class.name");
             try {
                 efCalculator = (IExtraFeeCalculator) Class.forName(className).newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
         }
@@ -75,23 +65,39 @@ public class CourseFactory {
         return efCalculator;
     }
 
-    public void LoadProperties() {
-        FileInputStream propFile = null;
-        Properties prop = new Properties();
+    // Should I make a separate class for DiscountFactory?
+    // See the composite pattern text example in Head First Book
+    // See the composite pattern text example in Web, for correction
+    public void createDiscountPolicy(LinkedList<String> atomicStrategies, String compositeStrategy, Registration reg) {
+        int listSize = atomicStrategies.size();
+        String strategyPackageName = "assignment.discountstrategies.";
 
-        try {
-            propFile = new FileInputStream( "resources/CourseRegister.config");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (listSize > 1) {
+            try {
+                compositeStrategy = strategyPackageName + compositeStrategy;
+                CompositeDiscount tempStrategy = (CompositeDiscount)
+                        Class.forName(compositeStrategy).newInstance();
+
+                for (String name: atomicStrategies) {
+                    IDiscountStrategy tempAtom = (IDiscountStrategy)
+                            Class.forName(strategyPackageName+name).newInstance();
+
+                    tempStrategy.add(tempAtom);
+                }
+
+                reg.setDiscountStrategy(tempStrategy);
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+                e.printStackTrace();
+            }
         }
-
-        try {
-            prop.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
+        else if (listSize == 1){
+            try {
+                IDiscountStrategy tempStrategy = (IDiscountStrategy)
+                        Class.forName(strategyPackageName+atomicStrategies.get(0)).newInstance();
+                reg.setDiscountStrategy(tempStrategy);
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+                e.printStackTrace();
+            }
         }
-
-        // set the system properties
-        System.setProperties(prop);
     }
 }
