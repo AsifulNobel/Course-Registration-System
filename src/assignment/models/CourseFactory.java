@@ -5,6 +5,7 @@ import assignment.discountstrategies.IDiscountStrategy;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -89,7 +90,12 @@ public class CourseFactory {
         try (FileInputStream propFile = new FileInputStream("resources/CourseRegister.config")) {
             prop.load(propFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Enumeration props = prop.propertyNames();
+
+            while (props.hasMoreElements()) {
+                String temp = (String) props.nextElement();
+                System.setProperty(temp, prop.getProperty(temp));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
