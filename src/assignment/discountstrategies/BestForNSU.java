@@ -10,7 +10,6 @@ public class BestForNSU extends CompositeDiscount {
     private int total;
 
     public BestForNSU() {
-        super();
         total = 0;
     }
 

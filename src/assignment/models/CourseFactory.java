@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -17,7 +18,10 @@ public class CourseFactory {
     private static CourseFactory instance;
     private IExtraFeeCalculator efCalculator;
     private IDiscountStrategy discountStrategy;
-    private String selectedStrategy;
+    private Class<?> discountStrategyGetter;
+    private String selectedPolicy;
+    private Map<String, Boolean> policySelects;
+    private int discount;
 
     public CourseFactory() {
 
@@ -41,12 +45,12 @@ public class CourseFactory {
         return cList;
     }
 
-    public String getSelectedStrategy() {
-        return selectedStrategy;
+    public String getSelectedPolicy() {
+        return selectedPolicy;
     }
 
-    public void setSelectedStrategy(String selectedStrategy) {
-        this.selectedStrategy = selectedStrategy;
+    public void setSelectedPolicy(String selectedPolicy) {
+        this.selectedPolicy = selectedPolicy;
     }
 
     public Course getCourse(String id) {
@@ -108,19 +112,21 @@ public class CourseFactory {
     }
 
     public IDiscountStrategy getDiscountStrategy() {
-        String className = this.getClass().getPackage().getName() + "." +
-                System.getProperty(getSelectedStrategy());
-
-        try {
-            discountStrategy = (IDiscountStrategy) Class.forName(className).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         return discountStrategy;
+    }
+
+    public Map<String, Boolean> getPolicySelects() {
+        return policySelects;
+    }
+
+    public void setPolicySelects(Map<String, Boolean> policySelects) {
+        this.policySelects = policySelects;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void calcDiscount() {
     }
 }

@@ -13,9 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -175,12 +173,20 @@ public class RegistrationFxController implements Initializable, Observer {
     @FXML
     private void calculateDiscount() {
         // need implementation
-        if(excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
+        if (excellenceBox.isSelected() || minorityBox.isSelected() || freedomBox.isSelected()) {
             String userPolicy = bestComboSelector.getValue();
 
-            if (userPolicy.equals("Best For NSU")) {
-               factory.setSelectedStrategy(userPolicy.replaceAll(" ", ""));
-            }
+            factory.setSelectedPolicy(userPolicy.replaceAll(" ", ""));
+            Map<String, Boolean> policySelects = new HashMap<>();
+
+            policySelects.put("excellence", excellenceBox.isSelected());
+            policySelects.put("freedom", freedomBox.isSelected());
+            policySelects.put("minority", minorityBox.isSelected());
+
+            factory.setPolicySelects(policySelects);
+
+            factory.calcDiscount();
+
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("!!!Error!!!");
