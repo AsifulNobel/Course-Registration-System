@@ -2,6 +2,7 @@ package assignment.controller;
 
 import assignment.configurationUser.ConfigLoader;
 import assignment.discountstrategies.AcademicExcellenceDiscount;
+import assignment.discountstrategies.IDiscountStrategy;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import assignment.notifiers.BeepMaker;
@@ -75,10 +76,6 @@ public class RegistrationFxController implements Initializable, Observer{
         table.setItems(data);
         slNo.setCellValueFactory(col -> new ReadOnlyObjectWrapper<Integer>(table.getItems().indexOf(col.getValue()) + 1));
         slNo.setSortable(false);
-
-        optionClassMap = new HashMap<>();
-        optionClassMap.put("Best For NSU", "BestForNSU");
-        optionClassMap.put("Best For Student", "BestForStudent");
 
         controller = new RegisterCourseController();
         controller.makeNewRegistration();
@@ -156,6 +153,7 @@ public class RegistrationFxController implements Initializable, Observer{
     @FXML
     private void calculateDiscount() {
         strategyList = new LinkedList<String>();
+        IDiscountStrategy temp;
 
         if (excellenceBox.isSelected())
             strategyList.add(discountOptions[0]);
@@ -163,7 +161,10 @@ public class RegistrationFxController implements Initializable, Observer{
             strategyList.add(discountOptions[1]);
         if (freedomBox.isSelected())
             strategyList.add(discountOptions[2]);
-        factory.createDiscountPolicy(strategyList, optionClassMap.get(bestComboSelector.getValue()), controller.getReg());
+        temp = factory.createDiscountPolicy(strategyList, bestComboSelector.getValue().replaceAll("\\s+", ""));
+
+        if (temp != null)
+            controller.getReg().setDiscountStrategy(temp);
     }
 
     @Override

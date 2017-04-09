@@ -65,39 +65,36 @@ public class CourseFactory {
         return efCalculator;
     }
 
-    // Should I make a separate class for DiscountFactory?
-    // See the composite pattern text example in Head First Book
-    // See the composite pattern text example in Web, for correction
-    public void createDiscountPolicy(LinkedList<String> atomicStrategies, String compositeStrategy, Registration reg) {
+    public IDiscountStrategy createDiscountPolicy(LinkedList<String> atomicStrategies, String compositeStrategy) {
+
         int listSize = atomicStrategies.size();
         String strategyPackageName = "assignment.discountstrategies.";
 
-        if (listSize > 1) {
-            try {
+        try {
+            if (listSize > 1) {
                 compositeStrategy = strategyPackageName + compositeStrategy;
                 CompositeDiscount tempStrategy = (CompositeDiscount)
                         Class.forName(compositeStrategy).newInstance();
 
-                for (String name: atomicStrategies) {
+                for (String name : atomicStrategies) {
                     IDiscountStrategy tempAtom = (IDiscountStrategy)
-                            Class.forName(strategyPackageName+name).newInstance();
+                            Class.forName(strategyPackageName + name).newInstance();
 
                     tempStrategy.add(tempAtom);
                 }
 
-                reg.setDiscountStrategy(tempStrategy);
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                e.printStackTrace();
+                return tempStrategy;
             }
-        }
-        else if (listSize == 1){
-            try {
-                IDiscountStrategy tempStrategy = (IDiscountStrategy)
-                        Class.forName(strategyPackageName+atomicStrategies.get(0)).newInstance();
-                reg.setDiscountStrategy(tempStrategy);
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                e.printStackTrace();
+            else if (listSize == 1) {
+                IDiscountStrategy tempStrategy = (IDiscountStrategy) Class.forName(
+                        strategyPackageName+atomicStrategies.get(0)).newInstance();
+
+                return tempStrategy;
             }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
         }
+
+        return null;
     }
 }
