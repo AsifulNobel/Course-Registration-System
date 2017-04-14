@@ -1,6 +1,7 @@
 package assignment.persistence;
 
 import assignment.models.Course;
+import assignment.models.Program;
 import assignment.models.Registration;
 
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ public class PersistenceFacade {
     public  PersistenceFacade() {
         mappers.put(Course.class, new CourseRDBMapper());
         mappers.put(Registration.class, new RegistrationRDBMapper());
-
+        mappers.put(Program.class, new ProgramRDBMapper());
     }
 
     public void put(Object object) throws SQLException {
@@ -26,8 +27,8 @@ public class PersistenceFacade {
     }
 
     public Object get(String id , Object object) throws SQLException {
-
         IMapper mapper = mappers.get(object.getClass());
+
         return mapper.get(id);
     }
 

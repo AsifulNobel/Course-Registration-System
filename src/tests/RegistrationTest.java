@@ -14,9 +14,9 @@ public class RegistrationTest {
     public void getTotalTest() {
         Registration registration = new Registration();
 
-        registration.addCourse(new Course("CSE 327", "Soft.Eng.", 3, 5500));
-        registration.addCourse(new Course("CSE 440", "Intro. to AI", 3, 5500));
-        registration.addCourse(new Course("CSE 373", "Intro.Algo.", 3, 5500));
+        registration.addCourse(new Course("CSE 327", "Soft.Eng.", 3, 5500, "CSE"));
+        registration.addCourse(new Course("CSE 440", "Intro. to AI", 3, 5500, "CSE"));
+        registration.addCourse(new Course("CSE 373", "Intro.Algo.", 3, 5500, "CSE"));
 
         int total = registration.getTotal();
 
@@ -29,7 +29,7 @@ public class RegistrationTest {
 
         int numCoursesBefore = registration.getCourseList().size();
 
-        registration.addCourse(new Course("CSE 327", "Soft.Eng.", 3, 5500));
+        registration.addCourse(new Course("CSE 327", "Soft.Eng.", 3, 5500, "CSE"));
         int numCoursesAfter = registration.getCourseList().size();
 
         Assert.assertEquals(numCoursesBefore + 1, numCoursesAfter);

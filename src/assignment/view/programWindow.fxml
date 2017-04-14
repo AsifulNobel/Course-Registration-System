@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.ProgramWindowController">
+   <children>
+      <Label layoutX="49.0" layoutY="26.0" text="Course ID" />
+      <Label fx:id="courseId" layoutX="213.0" layoutY="26.0" text="Label" />
+      <Label layoutX="49.0" layoutY="65.0" text="Course Title" />
+      <Label fx:id="courseTitle" layoutX="213.0" layoutY="65.0" text="Label" />
+      <Label fx:id="tuitionPerCredit" layoutX="213.0" layoutY="140.0" text="Label" />
+      <Label layoutX="49.0" layoutY="140.0" text="Tuition/Credit" />
+      <Label fx:id="credits" layoutX="213.0" layoutY="101.0" text="Label" />
+      <Label layoutX="49.0" layoutY="101.0" text="Credits" />
+      <Label fx:id="programTitle" layoutX="213.0" layoutY="218.0" text="Label" />
+      <Label layoutX="49.0" layoutY="218.0" text="Program Title" />
+      <Label layoutX="49.0" layoutY="179.0" text="Program Name" />
+      <Label fx:id="programName" layoutX="213.0" layoutY="179.0" text="Label" />
+      <Label layoutX="49.0" layoutY="251.0" text="Department" />
+      <Label fx:id="department" layoutX="213.0" layoutY="251.0" text="Label" />
+   </children>
+</AnchorPane>

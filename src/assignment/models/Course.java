@@ -1,6 +1,8 @@
 package assignment.models;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -11,19 +13,15 @@ public class Course {
     private SimpleStringProperty title;
     private SimpleIntegerProperty credit;
     private SimpleIntegerProperty tuitionPerCredit;
+//    private IProgram program;
+    private SimpleObjectProperty<IProgram> program;
 
-    public Course() {
-        this.id = new SimpleStringProperty("");
-        this.title = new SimpleStringProperty("");
-        this.credit = new SimpleIntegerProperty(0);
-        this.tuitionPerCredit = new SimpleIntegerProperty(0);
-    }
-
-    public Course(String id, String title, int credit, int tuitionPerCredit) {
+    public Course(String id, String title, int credit, int tuitionPerCredit, String progId) {
         this.id = new SimpleStringProperty(id);
         this.title = new SimpleStringProperty(title);
         this.credit = new SimpleIntegerProperty(credit);
         this.tuitionPerCredit = new SimpleIntegerProperty(tuitionPerCredit);
+        this.program = new SimpleObjectProperty<IProgram>(new ProgramProxy(progId));
     }
 
     public String getId() {
@@ -60,5 +58,25 @@ public class Course {
 
     public int getSubTotal() {
         return credit.get() * tuitionPerCredit.get();
+    }
+
+    public IProgram getProgram() {
+        return program.getValue();
+    }
+
+    public ObjectProperty<IProgram> getProgramProperty() {
+        return program;
+    }
+
+    public String getProgramId() {
+        return program.getValue().getId();
+    }
+
+    public String getProgramTitle() {
+        return program.getValue().getTitle();
+    }
+
+    public String getProgramDepartment() {
+        return program.getValue().getDepartment();
     }
 }

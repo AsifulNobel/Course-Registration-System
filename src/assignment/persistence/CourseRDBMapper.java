@@ -13,7 +13,7 @@ public class CourseRDBMapper implements IMapper {
 
     @Override
     public Object get(String id) {
-        Course course = new Course();
+        Course course = null;
         String sql = "SELECT * FROM Course_List WHERE id = ?;";
         ResultSet courses;
 
@@ -24,11 +24,8 @@ public class CourseRDBMapper implements IMapper {
             query.setString(1, id);
             courses = query.executeQuery();
 
-            course.setId(courses.getString(1));
-            course.setTitle(courses.getString(2));
-            course.setCredit(courses.getInt(3));
-            course.setTuitionPerCredit(courses.getInt(4));
-
+            course = new Course(courses.getString(1), courses.getString(2),
+                    courses.getInt(3), courses.getInt(4), courses.getString(5));
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

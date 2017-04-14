@@ -20,6 +20,7 @@
             <TableColumn fx:id="creditInfo" prefWidth="91.0" text="Credit" />
             <TableColumn fx:id="tuitionPerCreditInfo" prefWidth="145.0" text="TuitionPerCredit" />
             <TableColumn fx:id="moreInfo" minWidth="1.0" prefWidth="99.0" text="More Info" />
+            <TableColumn fx:id="programInfo" minWidth="1.0" prefWidth="99.0" text="Program Info" />
         </columns>
       </TableView>
       <ComboBox fx:id="programId" layoutX="356.0" layoutY="50.0" prefHeight="25.0" prefWidth="118.0" />

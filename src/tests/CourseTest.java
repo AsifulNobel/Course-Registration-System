@@ -12,7 +12,7 @@ public class CourseTest {
 
     @Test
     public void getSubTotalTest() {
-        Course course = new Course("CSE 327", "Soft.Eng.", 3, 5500);
+        Course course = new Course("CSE 327", "Soft.Eng.", 3, 5500, "CSE");
         int subTotal = course.getSubTotal();
         Assert.assertEquals((3 * 5500), subTotal);
     }

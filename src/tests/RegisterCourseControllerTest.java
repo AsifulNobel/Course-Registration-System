@@ -12,7 +12,7 @@ public class RegisterCourseControllerTest {
 
     @Test
     public void getCourseTest() {
-        Course course = new Course("CSE 327", "Soft.Eng.", 3, 5500);
+        Course course = new Course("CSE 327", "Soft.Eng.", 3, 5500, "CSE");
         RegisterCourseController controller = new RegisterCourseController();
 
         controller.makeNewRegistration();

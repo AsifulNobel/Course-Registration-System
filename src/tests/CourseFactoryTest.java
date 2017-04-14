@@ -12,7 +12,7 @@ public class CourseFactoryTest {
 
     @Test
     public void getCourseTest() {
-        Course course = new Course("CSE 338", "Networking", 3, 5500);
+        Course course = new Course("CSE 338", "Networking", 3, 5500, "CSE");
         CourseFactory courseFactory = new CourseFactory();
 
         Course x = courseFactory.getCourse(course.getId());

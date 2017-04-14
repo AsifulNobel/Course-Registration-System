@@ -34,12 +34,8 @@ public class CourseFactory {
             courses = query.executeQuery();
 
             while (courses.next()) {
-                Course course = new Course();
-
-                course.setId(courses.getString(1));
-                course.setTitle(courses.getString(2));
-                course.setCredit(courses.getInt(3));
-                course.setTuitionPerCredit(courses.getInt(4));
+                Course course = new Course(courses.getString(1), courses.getString(2),
+                        courses.getInt(3), courses.getInt(4), courses.getString(5));
 
                 cList.add(course);
             }

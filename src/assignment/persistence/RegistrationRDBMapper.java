@@ -33,7 +33,7 @@ public class RegistrationRDBMapper implements IMapper {
 
         for (String title:
                 temp) {
-            tempCourses.add((Course) PersistenceFacade.getInstance().get(title, new Course()));
+            tempCourses.add((Course) PersistenceFacade.getInstance().get(title, Course.class));
         }
 
         registration.setRegId(registrations.getInt(1));
