@@ -47,6 +47,10 @@ public class Registration extends Observable {
         return this.getTotal() + this.getExtraFeeAmount();
     }
 
+    public int getDiscount() {
+        return this.getGrandTotal() - this.getDiscountedGrandTotal();
+    }
+
     public int getDiscountedGrandTotal() {
         return discountStrategy.getTotal(this) + this.getExtraFeeAmount();
     }
@@ -59,6 +63,6 @@ public class Registration extends Observable {
         this.discountStrategy = discountStrategy;
 
         setChanged();
-        notifyObservers();
+        notifyObservers(this);
     }
 }

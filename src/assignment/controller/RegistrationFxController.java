@@ -1,5 +1,7 @@
 package assignment.controller;
 
+import assignment.components.ObserverDiscountLabel;
+import assignment.components.ObserverTotalLabel;
 import assignment.configurationUser.ConfigLoader;
 import assignment.discountstrategies.IDiscountStrategy;
 import assignment.models.Course;
@@ -27,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * Created by nobel on 04/03/17.
  */
-public class RegistrationFxController implements Initializable, Observer{
+public class RegistrationFxController implements Initializable {
     @FXML private TableView<Course> table;
     @FXML private TableColumn<Course, String> title;
     @FXML private TableColumn<Course, Integer> slNo;
@@ -47,8 +49,8 @@ public class RegistrationFxController implements Initializable, Observer{
 
     @FXML private Label total;
     @FXML private Label devFee_bdTax;
-    @FXML private Label discount;
-    @FXML private Label grandTotal;
+    @FXML private ObserverDiscountLabel discount;
+    @FXML private ObserverTotalLabel grandTotal;
 
     @FXML private CheckBox excellenceBox;
     @FXML private CheckBox minorityBox;
@@ -69,8 +71,6 @@ public class RegistrationFxController implements Initializable, Observer{
     private LinkedList<String> strategyList;
 
     private int COURSE_WINDOW_STATE = 0;
-
-    public Observable observableObject;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -106,21 +106,19 @@ public class RegistrationFxController implements Initializable, Observer{
         bestComboSelector.setItems(comboOptions);
         bestComboSelector.setValue(comboOptions.get(0));
 
+        /* Observer-Subject Initialization */
+        grandTotal.setObservable(controller.getReg());
+        discount.setObservable(controller.getReg());
+
         controller.getReg().addObserver(new BeepMaker(controller.getReg()));
-        controller.getReg().addObserver(this);
-        observableObject = controller.getReg();
+        controller.getReg().addObserver(grandTotal);
+        controller.getReg().addObserver(discount);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (observableObject == o) {
-            grandTotal.setText(Integer.toString(controller.getReg().getDiscountedGrandTotal()));
-            discount.setText(Integer.toString(controller.getReg().getGrandTotal()-controller.getReg().getDiscountedGrandTotal()));
-        }
-    }
 
     /*
-     * Creates new registration and re-initializes value labels to zero
+     * Creates new registration and re-initializes value labels to zero.
+     * Also reconnects observers to subject
      */
     @FXML
     public void addReg() {
@@ -131,6 +129,13 @@ public class RegistrationFxController implements Initializable, Observer{
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
         grandTotal.setText(Integer.toString(0));
+
+        grandTotal.setObservable(controller.getReg());
+        discount.setObservable(controller.getReg());
+
+        controller.getReg().addObserver(new BeepMaker(controller.getReg()));
+        controller.getReg().addObserver(grandTotal);
+        controller.getReg().addObserver(discount);
     }
 
     /* *
