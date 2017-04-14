@@ -1,22 +1,25 @@
 package assignment.controller;
 
 import assignment.configurationUser.ConfigLoader;
-import assignment.discountstrategies.AcademicExcellenceDiscount;
 import assignment.discountstrategies.IDiscountStrategy;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import assignment.notifiers.BeepMaker;
-import com.sun.javafx.collections.MappingChange;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,6 +38,9 @@ public class RegistrationFxController implements Initializable, Observer{
     @FXML private Button addButton;
     @FXML private Button newReg;
     @FXML private Button calculateDiscount;
+    @FXML private Button saveReg;
+    @FXML private Button fetchReg;
+    @FXML private Button courseInfo;
 
     @FXML private ComboBox<String> courseField;
     @FXML private ComboBox<String> bestComboSelector;
@@ -61,6 +67,8 @@ public class RegistrationFxController implements Initializable, Observer{
 
     private Map<String, String> optionClassMap;
     private LinkedList<String> strategyList;
+
+    private int COURSE_WINDOW_STATE = 0;
 
     public Observable observableObject;
 
@@ -103,6 +111,17 @@ public class RegistrationFxController implements Initializable, Observer{
         observableObject = controller.getReg();
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        if (observableObject == o) {
+            grandTotal.setText(Integer.toString(controller.getReg().getDiscountedGrandTotal()));
+            discount.setText(Integer.toString(controller.getReg().getGrandTotal()-controller.getReg().getDiscountedGrandTotal()));
+        }
+    }
+
+    /*
+     * Creates new registration and re-initializes value labels to zero
+     */
     @FXML
     public void addReg() {
         // set the table empty
@@ -114,6 +133,10 @@ public class RegistrationFxController implements Initializable, Observer{
         grandTotal.setText(Integer.toString(0));
     }
 
+    /* *
+     * Adds row of course related info to TableView after each addition
+     * of course in registration and updates value labels
+     * */
     @FXML
     public void addCourse() {
         String courseID = courseField.getValue();
@@ -167,11 +190,39 @@ public class RegistrationFxController implements Initializable, Observer{
             controller.getReg().setDiscountStrategy(temp);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (observableObject == o) {
-            grandTotal.setText(Integer.toString(controller.getReg().getDiscountedGrandTotal()));
-            discount.setText(Integer.toString(controller.getReg().getGrandTotal()-controller.getReg().getDiscountedGrandTotal()));
+
+    /* *
+     * Opens a new window which contains a table of course info and also
+     * has option to add a new course to DB.
+     * */
+    @FXML
+    private void showCourses() throws IOException {
+        if (this.COURSE_WINDOW_STATE == 0) {
+            Stage secondaryStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../view/courseWindow.fxml"));
+            secondaryStage.setTitle("Course Information");
+            secondaryStage.setScene(new Scene(root, 600, 337));
+            secondaryStage.setResizable(false);
+            secondaryStage.show();
+
+            this.COURSE_WINDOW_STATE = 1;
+
+            secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                /* *
+                 * Re-enables the button after closing of the window
+                 * by unsetting COURSE_WINDOW_STATE
+                 * */
+                public void handle(WindowEvent we) {
+                    COURSE_WINDOW_STATE = 0;
+                }
+            });
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setHeaderText("Can not open course window");
+            alert.setContentText("Course Window Already Opened");
+            alert.showAndWait();
         }
     }
 }

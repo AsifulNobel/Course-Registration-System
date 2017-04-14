@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.CourseWindowController">
+   <children>
+      <TextField fx:id="courseId" alignment="CENTER" layoutX="121.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" promptText="Course ID" />
+      <TextField fx:id="courseTitle" alignment="CENTER" layoutX="264.0" layoutY="14.0" prefHeight="25.0" prefWidth="212.0" promptText="Course Title" />
+      <TextField fx:id="credit" alignment="CENTER" layoutX="121.0" layoutY="50.0" prefHeight="25.0" prefWidth="82.0" promptText="Credit" />
+      <TextField fx:id="tuitionPerCredit" alignment="CENTER" layoutX="216.0" layoutY="50.0" prefHeight="25.0" prefWidth="130.0" promptText="Tuition/Credit" />
+      <Button fx:id="addButton" layoutX="431.0" layoutY="90.0" mnemonicParsing="false" onAction="#addCourse" text="Add" />
+      <TableView fx:id="table" layoutX="1.0" layoutY="138.0" prefHeight="200.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="idInfo" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="titleInfo" prefWidth="181.0" text="Title" />
+            <TableColumn fx:id="creditInfo" prefWidth="91.0" text="Credit" />
+            <TableColumn fx:id="tuitionPerCreditInfo" prefWidth="145.0" text="TuitionPerCredit" />
+            <TableColumn fx:id="moreInfo" minWidth="1.0" prefWidth="99.0" text="More Info" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="programId" layoutX="356.0" layoutY="50.0" prefHeight="25.0" prefWidth="118.0" />
+   </children>
+</AnchorPane>

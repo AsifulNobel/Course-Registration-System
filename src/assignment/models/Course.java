@@ -12,6 +12,13 @@ public class Course {
     private SimpleIntegerProperty credit;
     private SimpleIntegerProperty tuitionPerCredit;
 
+    public Course() {
+        this.id = new SimpleStringProperty("");
+        this.title = new SimpleStringProperty("");
+        this.credit = new SimpleIntegerProperty(0);
+        this.tuitionPerCredit = new SimpleIntegerProperty(0);
+    }
+
     public Course(String id, String title, int credit, int tuitionPerCredit) {
         this.id = new SimpleStringProperty(id);
         this.title = new SimpleStringProperty(title);

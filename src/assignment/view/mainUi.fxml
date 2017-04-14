@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
@@ -17,7 +18,7 @@
                 <TableColumn fx:id="title" prefWidth="145.0" text="Course Title" />
                 <TableColumn fx:id="credit" prefWidth="103.0" text="Credit" />
                 <TableColumn fx:id="tuitionPerCredit" prefWidth="126.0" text="Tuition/Credit" />
-                <TableColumn fx:id="subTotal" prefWidth="126.0" text="Sub Total" />
+                <TableColumn fx:id="subTotal" prefWidth="142.0" text="Sub Total" />
             </columns>
         </TableView>
         <Label layoutX="353.0" layoutY="338.0" text="Total" />
@@ -33,5 +34,12 @@
         <Button fx:id="discountButton" layoutX="14.0" layoutY="449.0" mnemonicParsing="false" onAction="#calculateDiscount" text="Calculate Discount" />
         <Label layoutX="353.0" layoutY="393.0" text="Discount" />
         <Label fx:id="discount" layoutX="449.0" layoutY="393.0" text="0" />
+      <Label layoutX="299.0" layoutY="19.0" text="Student ID" />
+      <TextField fx:id="studentId" layoutX="386.0" layoutY="14.0" />
+      <Separator layoutX="282.0" orientation="VERTICAL" prefHeight="138.0" prefWidth="0.0" />
+      <Button fx:id="saveReg" layoutX="389.0" layoutY="50.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="fetchReg" layoutX="495.0" layoutY="50.0" mnemonicParsing="false" text="Fetch" />
+      <Separator layoutX="283.0" layoutY="86.0" prefHeight="8.0" prefWidth="315.0" />
+      <Button fx:id="courseInfo" layoutX="385.0" layoutY="100.0" mnemonicParsing="false" onAction="#showCourses" text="COURSE INFO" textAlignment="JUSTIFY" />
     </children>
 </AnchorPane>

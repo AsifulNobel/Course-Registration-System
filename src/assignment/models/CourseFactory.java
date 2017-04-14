@@ -1,9 +1,11 @@
 package assignment.models;
 
 import assignment.discountstrategies.*;
+import sun.awt.image.ImageWatched;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.*;
 import java.util.LinkedList;
 
 /**
@@ -16,22 +18,59 @@ public class CourseFactory {
 
     public CourseFactory() {
 
-        cList = new LinkedList<>();
-
-        // generate initial data
-        cList.add(new Course("CSE 327", "Soft.Eng.", 3, 5500));
-        cList.add(new Course("CSE 440", "Intro. to AI", 3, 5500));
-        cList.add(new Course("CSE 472", "Adv.Algo.", 3, 5500));
-        cList.add(new Course("CSE 373", "Intro.Algo.", 3, 5500));
-        cList.add(new Course("CSE 115", "Prog.Lang.1", 4, 5500));
-        cList.add(new Course("CSE 173", "Disc.Math", 3, 5500));
-        cList.add(new Course("CSE 215", "Prog.Lang.2", 4, 5500));
-        cList.add(new Course("CSE 311", "Database", 3, 5500));
-        cList.add(new Course("CSE 338", "Networking", 3, 5500));
     }
 
     public LinkedList<Course> getcList() {
+        String url = "jdbc:sqlite:DB/test.db";
+        Connection connection;
+        String sql = "SELECT * FROM Course_List;";
+        ResultSet courses;
+        cList = new LinkedList<Course>();
+
+        try {
+            connection = DriverManager.getConnection(url);
+            PreparedStatement query = connection.prepareStatement(sql);
+
+            courses = query.executeQuery();
+
+            while (courses.next()) {
+                Course course = new Course();
+
+                course.setId(courses.getString(1));
+                course.setTitle(courses.getString(2));
+                course.setCredit(courses.getInt(3));
+                course.setTuitionPerCredit(courses.getInt(4));
+
+                cList.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return cList;
+    }
+
+    public LinkedList<String> getpList() {
+        String url = "jdbc:sqlite:DB/test.db";
+        Connection connection;
+        String sql = "SELECT * FROM Programs;";
+        ResultSet programs;
+        LinkedList<String> pList = new LinkedList<String>();
+
+        try {
+            connection = DriverManager.getConnection(url);
+            PreparedStatement query = connection.prepareStatement(sql);
+
+            programs = query.executeQuery();
+
+            while (programs.next()) {
+                pList.add(programs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pList;
     }
 
 
