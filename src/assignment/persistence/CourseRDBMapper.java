@@ -1,10 +1,8 @@
 package assignment.persistence;
 
 import assignment.models.Course;
-import sun.awt.image.ImageWatched;
 
 import java.sql.*;
-import java.util.LinkedList;
 
 /**
  * Created by nobel on 14/04/17.
@@ -16,7 +14,7 @@ public class CourseRDBMapper implements IMapper {
     @Override
     public Object get(String id) {
         Course course = new Course();
-        String sql = "SELECT * FROM Course_List WHERE course_id = ?;";
+        String sql = "SELECT * FROM Course_List WHERE id = ?;";
         ResultSet courses;
 
         try {
@@ -26,11 +24,12 @@ public class CourseRDBMapper implements IMapper {
             query.setString(1, id);
             courses = query.executeQuery();
 
-            courses.first();
             course.setId(courses.getString(1));
             course.setTitle(courses.getString(2));
             course.setCredit(courses.getInt(3));
             course.setTuitionPerCredit(courses.getInt(4));
+
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,6 +54,8 @@ public class CourseRDBMapper implements IMapper {
             query.setString(5, "CSE");
 
             query.executeUpdate();
+
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import assignment.components.ObserverDiscountLabel?>
+<?import assignment.components.ObserverTotalLabel?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import assignment.components.ObserverTotalLabel?>
-<?import assignment.components.ObserverDiscountLabel?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment.controller.RegistrationFxController">
     <children>
         <Button fx:id="newReg" layoutX="115.0" layoutY="14.0" mnemonicParsing="false" onAction="#addReg" text="New Registration" />
@@ -39,9 +36,9 @@
       <Label layoutX="299.0" layoutY="19.0" text="Student ID" />
       <TextField fx:id="studentId" layoutX="386.0" layoutY="14.0" />
       <Separator layoutX="282.0" orientation="VERTICAL" prefHeight="138.0" prefWidth="0.0" />
-      <Button fx:id="saveReg" layoutX="389.0" layoutY="50.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="fetchReg" layoutX="495.0" layoutY="50.0" mnemonicParsing="false" text="Fetch" />
+      <Button fx:id="saveReg" layoutX="389.0" layoutY="50.0" onAction="#saveRegistration" mnemonicParsing="false" text="Save" />
+      <Button fx:id="fetchReg" layoutX="495.0" layoutY="50.0" onAction="#fetchRegistration" mnemonicParsing="false" text="Fetch" />
       <Separator layoutX="283.0" layoutY="86.0" prefHeight="8.0" prefWidth="315.0" />
-      <Button fx:id="courseInfo" layoutX="385.0" layoutY="100.0" mnemonicParsing="false" onAction="#showCourses" text="COURSE INFO" textAlignment="JUSTIFY" />
+      <Button fx:id="courseInfo" layoutX="385.0" layoutY="100.0" mnemonicParsing="false" onAction="#showCourses" text="ADD COURSE INFO" textAlignment="JUSTIFY" />
     </children>
 </AnchorPane>

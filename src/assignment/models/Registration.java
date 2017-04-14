@@ -4,6 +4,7 @@ import assignment.discountstrategies.IDiscountStrategy;
 
 import java.util.LinkedList;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
 /**
  * Created by nobel
@@ -14,6 +15,10 @@ public class Registration extends Observable {
     public LinkedList<Course> courseList;
     private IExtraFeeCalculator iefc;
     private IDiscountStrategy discountStrategy;
+    private int regId;
+    private int totalCredits;
+    private int discount;
+    private int discountedTotal;
 
     public Registration() {
          courseList = new LinkedList<>();
@@ -29,6 +34,31 @@ public class Registration extends Observable {
 
     public void addCourse(Course newCourse) {
         courseList.add(newCourse);
+        totalCredits += newCourse.getCredit();
+    }
+
+    public int getTotalCredits() {
+        return totalCredits;
+    }
+
+    public void setTotalCredits(int totalCredits) {
+        this.totalCredits = totalCredits;
+    }
+
+    public void setRegId(int id) {
+        this.regId = id;
+    }
+
+    public int getRegId() {
+        return this.regId;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public void setDiscountedTotal(int discountedTotal) {
+        this.discountedTotal = discountedTotal;
     }
 
     public int getTotal() {
@@ -48,11 +78,16 @@ public class Registration extends Observable {
     }
 
     public int getDiscount() {
-        return this.getGrandTotal() - this.getDiscountedGrandTotal();
+        if (discountStrategy != null)
+            discount = this.getGrandTotal() - this.getDiscountedGrandTotal();
+        return discount;
     }
 
     public int getDiscountedGrandTotal() {
-        return discountStrategy.getTotal(this) + this.getExtraFeeAmount();
+        if (discountStrategy != null)
+            discountedTotal = discountStrategy.getTotal(this) + this.getExtraFeeAmount();
+
+        return discountedTotal;
     }
 
     public IDiscountStrategy getDiscountStrategy() {

@@ -3,6 +3,7 @@ package assignment.persistence;
 import assignment.models.Course;
 import assignment.models.Registration;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -18,13 +19,13 @@ public class PersistenceFacade {
 
     }
 
-    public void put(Object object) {
+    public void put(Object object) throws SQLException {
 
         IMapper mapper = mappers.get(object.getClass());
         mapper.put(object);
     }
 
-    public Object get(String id , Object object) {
+    public Object get(String id , Object object) throws SQLException {
 
         IMapper mapper = mappers.get(object.getClass());
         return mapper.get(id);

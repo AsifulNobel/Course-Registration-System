@@ -10,14 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
-import java.net.InterfaceAddress;
 import java.net.URL;
-import java.sql.*;
-import java.util.LinkedList;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 /**
  * Created by nobel on 14/04/17.
@@ -87,7 +83,16 @@ public class CourseWindowController implements Initializable {
         Course course = new Course(courseId.getText(),
                 courseTitle.getText(), Integer.parseInt(credit.getText()),
                 Integer.parseInt(tuitionPerCredit.getText()));
-        PersistenceFacade.getInstance().put(course);
+
+        try {
+            PersistenceFacade.getInstance().put(course);
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("FAILURE");
+            alert.setHeaderText("Course Cannot Be Added");
+            alert.setContentText("Course Already Exists!");
+            alert.showAndWait();
+        }
 
         courses.add(course);
     }

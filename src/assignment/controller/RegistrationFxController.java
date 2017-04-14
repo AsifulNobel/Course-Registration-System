@@ -7,6 +7,7 @@ import assignment.discountstrategies.IDiscountStrategy;
 import assignment.models.Course;
 import assignment.models.CourseFactory;
 import assignment.notifiers.BeepMaker;
+import assignment.persistence.PersistenceFacade;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,9 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -56,6 +59,8 @@ public class RegistrationFxController implements Initializable {
     @FXML private CheckBox minorityBox;
     @FXML private CheckBox freedomBox;
 
+    @FXML private TextField studentId;
+
     private RegisterCourseController controller;
     private CourseFactory factory;
     private ConfigLoader propLoader;
@@ -71,6 +76,7 @@ public class RegistrationFxController implements Initializable {
     private LinkedList<String> strategyList;
 
     private int COURSE_WINDOW_STATE = 0;
+    private int REGISTRATION_WINDOW_STATE = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -201,33 +207,99 @@ public class RegistrationFxController implements Initializable {
      * has option to add a new course to DB.
      * */
     @FXML
-    private void showCourses() throws IOException {
-        if (this.COURSE_WINDOW_STATE == 0) {
-            Stage secondaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../view/courseWindow.fxml"));
-            secondaryStage.setTitle("Course Information");
-            secondaryStage.setScene(new Scene(root, 600, 337));
-            secondaryStage.setResizable(false);
-            secondaryStage.show();
+    private void showCourses() {
+        try {
+            if (this.COURSE_WINDOW_STATE == 0) {
+                Stage secondaryStage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("../view/courseWindow.fxml"));
+                secondaryStage.setTitle("Course Information");
+                secondaryStage.setScene(new Scene(root, 600, 337));
+                secondaryStage.setResizable(false);
+                secondaryStage.show();
 
-            this.COURSE_WINDOW_STATE = 1;
+                this.COURSE_WINDOW_STATE = 1;
 
-            secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                /* *
-                 * Re-enables the button after closing of the window
-                 * by unsetting COURSE_WINDOW_STATE
-                 * */
-                public void handle(WindowEvent we) {
-                    COURSE_WINDOW_STATE = 0;
-                }
-            });
+                secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    /* *
+                     * Re-enables the button after closing of the window
+                     * by unsetting COURSE_WINDOW_STATE
+                     * */
+                    public void handle(WindowEvent we) {
+                        COURSE_WINDOW_STATE = 0;
+                        options.clear();
+                        options.addAll(factory.getcList().stream().map(Course::getId).collect(Collectors.toList()));
+                        courseField.setValue(options.get(0));
+                    }
+                });
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Can not open course window");
+                alert.setContentText("Course Window Already Opened");
+                alert.showAndWait();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error!");
-            alert.setHeaderText("Can not open course window");
-            alert.setContentText("Course Window Already Opened");
+    }
+
+    /* *
+    * Gets called when registration is saved.
+    * */
+    public void saveRegistration() {
+        controller.getReg().setRegId(Integer.parseInt(studentId.getText()));
+
+        try {
+            PersistenceFacade.getInstance().put(controller.getReg());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCCESS");
+            alert.setHeaderText("Registration Completed");
             alert.showAndWait();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("FAILURE");
+            alert.setHeaderText("Registration Failed");
+            alert.setContentText("Duplicate Student ID");
+            alert.showAndWait();
+        }
+    }
+
+
+    public void fetchRegistration() {
+        Context.getInstance().setStudentId(studentId.getText());
+
+        try {
+            if (this.REGISTRATION_WINDOW_STATE == 0) {
+                Stage secondaryStage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("../view/registrationViewerWindow.fxml"));
+                secondaryStage.setTitle("Registration Info");
+                secondaryStage.setScene(new Scene(root, 309, 242));
+                secondaryStage.setResizable(false);
+                secondaryStage.show();
+
+                this.REGISTRATION_WINDOW_STATE = 1;
+
+                secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    /* *
+                     * Re-enables the button after closing of the window
+                     * by unsetting REGISTRATION_WINDOW_STATE
+                     * */
+                    public void handle(WindowEvent we) {
+                        REGISTRATION_WINDOW_STATE = 0;
+                    }
+                });
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Can not open registration window");
+                alert.setContentText("Registration Window Already Opened");
+                alert.showAndWait();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
