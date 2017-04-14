@@ -27,7 +27,12 @@ public class PersistenceFacade {
     }
 
     public Object get(String id , Object object) throws SQLException {
+        System.out.println(id);
+        System.out.println(mappers.get(object.getClass()));
+
         IMapper mapper = mappers.get(object.getClass());
+
+        System.out.println(mapper == null);
 
         return mapper.get(id);
     }

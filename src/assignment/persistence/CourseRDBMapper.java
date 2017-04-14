@@ -48,7 +48,7 @@ public class CourseRDBMapper implements IMapper {
             query.setString(2, course.getTitle());
             query.setInt(3, course.getCredit());
             query.setInt(4, course.getTuitionPerCredit());
-            query.setString(5, "CSE");
+            query.setString(5, course.getProgramId());
 
             query.executeUpdate();
 

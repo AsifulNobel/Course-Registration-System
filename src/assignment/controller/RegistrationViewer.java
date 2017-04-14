@@ -28,8 +28,7 @@ public class RegistrationViewer implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            Registration registration = (Registration) PersistenceFacade.getInstance().get(Context.getInstance().
-                    getStudentId(), new Registration());
+            Registration registration = (Registration) PersistenceFacade.getInstance().get(Context.getInstance().getStudentId(), Registration.class);
 
             studentId.setText(String.valueOf(registration.getRegId()));
             course_list.setText(String.valueOf(registration.getCourseList().stream().map(Course::getId).
