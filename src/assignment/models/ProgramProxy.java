@@ -18,7 +18,7 @@ public class ProgramProxy implements IProgram {
     public IProgram getRealProgram() {
         if (realProgram == null)
             try {
-                realProgram = (IProgram) PersistenceFacade.getInstance().get(id, Program.class);
+                realProgram = (IProgram) PersistenceFacade.getInstance().get(id, new Program());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

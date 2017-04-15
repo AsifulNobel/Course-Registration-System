@@ -30,6 +30,6 @@ public class ProgramWindowController implements Initializable {
         tuitionPerCredit.setText(String.valueOf(course.getTuitionPerCredit()));
         programName.setText(course.getProgramId());
         programTitle.setText(course.getProgramTitle());
-//        department.setText(course.getProgramDepartment());
+        department.setText(course.getProgramDepartment());
     }
 }

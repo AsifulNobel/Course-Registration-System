@@ -86,6 +86,8 @@ public class Registration extends Observable {
     public int getDiscountedGrandTotal() {
         if (discountStrategy != null)
             discountedTotal = discountStrategy.getTotal(this) + this.getExtraFeeAmount();
+        else
+            discountedTotal = this.getGrandTotal();
 
         return discountedTotal;
     }

@@ -25,10 +25,13 @@ public class RegistrationViewer implements Initializable {
     @FXML private Label discount;
     @FXML private Label total;
 
+    private Registration registration;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            Registration registration = (Registration) PersistenceFacade.getInstance().get(Context.getInstance().getStudentId(), Registration.class);
+            registration = (Registration) PersistenceFacade.getInstance().get(Context.getInstance().getStudentId(),
+                    new Registration());
 
             studentId.setText(String.valueOf(registration.getRegId()));
             course_list.setText(String.valueOf(registration.getCourseList().stream().map(Course::getId).

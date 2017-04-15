@@ -13,8 +13,9 @@ public class Course {
     private SimpleStringProperty title;
     private SimpleIntegerProperty credit;
     private SimpleIntegerProperty tuitionPerCredit;
-//    private IProgram program;
     private SimpleObjectProperty<IProgram> program;
+
+    public Course() {}
 
     public Course(String id, String title, int credit, int tuitionPerCredit, String progId) {
         this.id = new SimpleStringProperty(id);

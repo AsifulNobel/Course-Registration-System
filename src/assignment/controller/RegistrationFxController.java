@@ -134,6 +134,7 @@ public class RegistrationFxController implements Initializable {
         controller.makeNewRegistration();
         total.setText(Integer.toString(controller.getReg().getTotal()));
         devFee_bdTax.setText(Integer.toString(0));
+        discount.setText("0");
         grandTotal.setText(Integer.toString(0));
 
         grandTotal.setObservable(controller.getReg());
