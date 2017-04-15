@@ -1,6 +1,7 @@
 package assignment.controller;
 
 import assignment.models.Course;
+import javafx.stage.Stage;
 
 /**
  * Created by nobel on 14/04/17.

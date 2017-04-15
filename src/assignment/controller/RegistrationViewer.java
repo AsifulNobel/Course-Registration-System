@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -48,7 +49,7 @@ public class RegistrationViewer implements Initializable {
             alert.setHeaderText("ID Not Found!");
             alert.showAndWait();
 
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
